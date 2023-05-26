@@ -9,11 +9,12 @@ An opinionated project template for Python projects.
 ## Usage
 
 ```console
-copier https://github.com/jannismain/iis-project-template-python
+mkdir my_new_project
+copier https://github.com/jannismain/iis-project-template-python my_new_project
 ```
 
 ## Opinions
 
-* Each project should have a README written in Markdown
-* Testing and continuous integration tools should be included from the very beginning
-* Python projects should be defined by a `pyproject.toml` file
+* Each project should have a README and CHANGELOG file
+* Testing and continuous integration tooling should be included from the very beginning
+* Python projects should be installable and defined by a `pyproject.toml` file
