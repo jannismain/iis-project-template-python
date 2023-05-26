@@ -17,3 +17,17 @@ use_bumpversion:
   type: bool
   default: true
   help: Use bumpversion for your project?
+
+user_name:
+  type: str
+  help: your gitlab user name
+
+remote_url:
+  type: str
+  help: URL of the remote repository
+  default: git@git01.iis.fhg.de:{{user_name}}/{{project_name | lower | replace(' ', '-')}}.git
+
+_tasks:
+  - "git init"
+  - "git remote add origin {{remote_url}}"
+  - "{% if use_precommit %}pre-commit install{% endif %}"
