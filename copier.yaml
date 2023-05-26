@@ -4,18 +4,9 @@ project_name:
   type: str
   help: What is the name of your project?
 
-# remote:
-#   type: str
-#   choices:
-#     IIS: git01.iis.fhg.de
-#     FhG: gitlab.cc-asp.fraunhofer.de
-#     Github: github.com
-#     Other: None
-#   default: git01.iis.fhg.de
-
-ci:
+package_name:
   type: str
-  choices: [gitlab, github]
+  default: "{{ project_name|lower|replace(' ', '_')|replace('-', '_') }}"
 
 use_precommit:
   type: bool
