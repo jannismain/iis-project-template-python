@@ -10,7 +10,7 @@
 # There are some restrictions on what makes a valid project name
 # specification here:
 # https://packaging.python.org/specifications/core-metadata/#name
-name = "sampleproject"  # Required
+name = "{{project_name | lower | replace(' ', '-') }}" # Required
 
 # Versions should comply with PEP 440:
 # https://www.python.org/dev/peps/pep-0440/
@@ -22,7 +22,7 @@ version = "0.0.1" # Required
 # This is a one-line description or tagline of what your project does. This
 # corresponds to the "Summary" metadata field:
 # https://packaging.python.org/specifications/core-metadata/#summary
-description = "A sample Python project"  # Optional
+description = "" # Optional
 
 # This is an optional longer description of your project that represents
 # the body of text which users will see when they visit PyPI.
@@ -43,7 +43,7 @@ requires-python = ">=3.7"
 # This is either text indicating the license for the distribution, or a file
 # that contains the license
 # https://packaging.python.org/en/latest/specifications/core-metadata/#license
-license = {file = "LICENSE.txt"}
+license = { file = "LICENSE.txt" }
 
 # This field adds keywords for your project which will appear on the
 # project page. What does your project relate to?
@@ -51,20 +51,20 @@ license = {file = "LICENSE.txt"}
 # Note that this is a list of additional keywords, separated
 # by commas, to be used to assist searching for the distribution in a
 # larger catalog.
-keywords = ["sample", "setuptools", "development"]  # Optional
+keywords = [] # Optional
 
 # This should be your name or the name of the organization who originally
 # authored the project, and a valid email address corresponding to the name
 # listed.
 authors = [
-  {name = "A. Random Developer", email = "author@example.com" } # Optional
+  { name = "{{user_name}}", email = "{{user_mail}}@iis.fhg.de" }, # Optional
 ]
 
 # This should be your name or the names of the organization who currently
 # maintains the project, and a valid email address corresponding to the name
 # listed.
 maintainers = [
-  { name = "A. Great Maintainer", email = "maintainer@example.com" }, # Optional
+  { name = "{{user_name}}", email = "{{user_name}}@iis.fhg.de" }, # Optional
 ]
 
 # This field lists other packages that your project depends on to run.
@@ -73,9 +73,7 @@ maintainers = [
 #
 # For an analysis of this field vs pip's requirements files see:
 # https://packaging.python.org/discussions/install-requires-vs-requirements/
-dependencies = [ # Optional
-  "peppercorn"
-]
+dependencies = [] # Optional
 
 # List additional groups of dependencies here (e.g. development
 # dependencies). Users will be able to install these using the "extras"
@@ -86,8 +84,8 @@ dependencies = [ # Optional
 # Similar to `dependencies` above, these must be valid existing
 # projects.
 [project.optional-dependencies] # Optional
-dev = ["check-manifest"]
-test = ["coverage", "pytest", "pytest-cov"]
+dev = ["black"]
+test = ["pytest", "pytest-cov"]
 
 # List URLs that are relevant to your project
 #
@@ -99,7 +97,7 @@ test = ["coverage", "pytest", "pytest-cov"]
 # issues, where the source is hosted, where to say thanks to the package
 # maintainers, and where to support the project financially. The key is
 # what's used to render the link text on PyPI.
-[project.urls]  # Optional
+[project.urls] # Optional
 "Homepage" = "https://github.com/pypa/sampleproject"
 "Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
 "Changelog" = "https://github.com/pypa/sampleproject/blob/main/CHANGELOG.md"
@@ -107,7 +105,7 @@ test = ["coverage", "pytest", "pytest-cov"]
 
 # The following would provide a command line executable called `sample`
 # which executes the function `main` from this package when invoked.
-[project.scripts]  # Optional
+[project.scripts] # Optional
 sample = "sample.cli:main"
 
 # This is configuration specific to the `setuptools` build backend.
@@ -115,7 +113,7 @@ sample = "sample.cli:main"
 [tool.setuptools]
 # If there are data files included in your packages that need to be
 # installed, specify them here.
-package-data = {"sample" = ["*.dat"]}
+package-data = { "sample" = ["*.dat"] }
 
 [build-system]
 # These are the assumed default build requirements from pip:
