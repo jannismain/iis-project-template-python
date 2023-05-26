@@ -21,3 +21,8 @@ use_precommit:
   type: bool
   default: false
   help: Do you want to use pre-commit?
+
+use_bumpversion:
+  type: bool
+  default: true
+  help: Use bumpversion for your project?
