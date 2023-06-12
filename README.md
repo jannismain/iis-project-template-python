@@ -21,6 +21,8 @@ See this [sample project](https://git01.iis.fhg.de/mkj/sample-project) to see ho
 
 * [copier](https://github.com/copier-org/copier)
 
+*Note: If you have [`pipx`][pipx] installed (you should, it is good), you can simply use `pipx run copier` out of the box.*
+
 ### Usage
 
 ```console
@@ -101,6 +103,7 @@ Learn more about [good documentation practices][documentation].
 [.gitlab-ci.yml]: https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html
 [gitlab coverage report]: https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportscoverage_report
 [mypy]: https://mypy.readthedocs.io/
+[pipx]: https://pypa.github.io/pipx/
 
 [readme]: https://intern.iis.fhg.de/x/I5DPFQ
 [changelog]: https://intern.iis.fhg.de/x/7jCzFQ
