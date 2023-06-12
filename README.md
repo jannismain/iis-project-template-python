@@ -7,7 +7,8 @@ An opinionated project template for Python projects.
 * Each project has a [README][] and [CHANGELOG][] file
 * [Testing][] and [continuous integration][ci] tooling are included from the very beginning
   * Test coverage is collected and displayed as a badge
-* Projects are documented from the very first commit using [MkDocs][] and [Material for MkDocs][]
+  * Coverage report is integrated with [Gitlab's coverage report artifact][gitlab coverage report]
+* Projects are documented using [MkDocs][] with the [Material for MkDocs][] theme
 * Projects use [pre-commit][] to ensure adherence to a [coding style][] on the client side
 * Projects use bumpversion to increase their version according to [semantic versioning guidelines][semver]
 * Python projects are installable
@@ -86,7 +87,7 @@ These tests are also executed as part of a [Gitlab continuous integration][gitla
 
 Projects generated from this template start with [MkDocs][] as a documentation system right out of the box, which is configured via the `./mkdocs.yaml` file to use the excellent [Material for MkDocs][] theme. Python docstrings are extracted and added as reference documentation using the [`mkdocstrings`][mkdocstrings] extension.
 
-While the [README][] is the first thing developers are going to see when visiting your project, the [CHANGELOG][] is most likely encountered by new or recurring users that want to know what has changed and whether they should upgrade.
+In addition, projects start with a [README][] and [CHANGELOG][] file.
 
 Learn more about [good documentation practices][documentation].
 
@@ -98,6 +99,8 @@ Learn more about [good documentation practices][documentation].
 [pytest]: https://pytest.org/
 [gitlab ci]: https://docs.gitlab.com/ee/ci/
 [.gitlab-ci.yml]: https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html
+[gitlab coverage report]: https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportscoverage_report
+[mypy]: https://mypy.readthedocs.io/
 
 [readme]: https://intern.iis.fhg.de/x/I5DPFQ
 [changelog]: https://intern.iis.fhg.de/x/7jCzFQ
