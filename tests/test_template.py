@@ -18,7 +18,7 @@ template_variables = {
 fp_template = Path(__file__).parent.parent
 
 static_data = dict(
-    user_name="mkj", remote_url="git@git01.iis.fhg.de:mkj/sample-project-full.git"
+    user_name="mkj", remote_url="git@git01.iis.fhg.de:mkj/sample-project.git"
 )
 
 
