@@ -24,7 +24,7 @@ test:
     - python -m anybadge --label=Maintainability --value="$(python -m radon cc --total-average -nc src | tail -n 1 | cut -d' ' -f 3) ($(python -m radon cc --total-average -nc src | tail -n 1 | cut -d' ' -f 4 | cut -c 2-4))" -f build/badges/maintainability -o
     # generate a badge for the documentation with the current version as label
     # - color: #1082C2 corresponds to the default "informational" color set by https://shields.io
-    - python -m anybadge --label=Documentation --value="v$(python -m sample_project --version)" --color "#1082C2" -f build/badges/documentation -o
+    - python -m anybadge --label=Documentation --value="v$(python -m {{package_name}} --version)" --color "#1082C2" -f build/badges/documentation -o
   coverage: '/TOTAL.+?(\d+\%)/'
   artifacts:
     when: always
