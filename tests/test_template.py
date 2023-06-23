@@ -4,7 +4,7 @@ from subprocess import check_output
 
 import pytest
 import yaml
-from copier import run_auto
+from copier import run_copy
 from pytest_venv import VirtualEnvironment
 
 template_variables = {
@@ -41,7 +41,7 @@ def test_template_generation(
     use_bumpversion: bool,
     project_name: str = "Sample Project",
 ):
-    run_auto(
+    run_copy(
         str(fp_template),
         str(tmp_path),
         data=dict(
@@ -91,3 +91,5 @@ def test_template_generation(
 
     # verify that pytest works and all tests pass
     check_output([venv_bin / "pytest", "-q"])
+
+    # TODO: Test template update
