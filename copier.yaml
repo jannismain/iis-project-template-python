@@ -20,6 +20,11 @@ use_bumpversion:
   default: true
   help: Use bumpversion to manage semantic version across multiple files?
 
+use_mypy:
+  type: bool
+  default: false
+  help: Use mypy to verify type hints in your project?
+
 user_name:
   type: str
   help: your gitlab user name
