@@ -7,6 +7,6 @@ mkdocs-material
 mkdocs-git-revision-date-localized-plugin
 mkdocs-literate-nav
 mkdocs-macros-plugin
-git+https://github.com/jannismain/mkdocs-macros-includex
+mkdocs-macros-includex
 mkdocs-exclude
 mkdocs-autorefs

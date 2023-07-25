@@ -47,7 +47,8 @@ plugins:
       implicit_index: true
   - macros: # see https://mkdocs-macros-plugin.readthedocs.io/
       include_dir: .
-      module_name: docs/util/macros.py
+      module_name: docs/util/macros
+      modules: [includex]
   - autorefs
 
 markdown_extensions:
