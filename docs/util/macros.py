@@ -63,7 +63,7 @@ def define_env(env: MacrosPlugin):
 
     env.macro(get_files)
     env.macro(list_directory)
-    env.macro(cli_command)
+    env.macro(run)
 
 
 def get_files(directory: str | pathlib.Path, match: str = "", ignore: str = "") -> List[str]:
@@ -114,7 +114,7 @@ fp_cli_command_output_cache = root / "build" / ".docs_cache"
 fp_cli_command_output_cache.mkdir(parents=True, exist_ok=True)
 
 
-def cli_command(
+def run(
     *command,
     setup: list = None,
     skip_lines=0,
