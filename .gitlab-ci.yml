@@ -1,4 +1,6 @@
-image: python
+default:
+  image: python
+  tags: [asprunner]
 
 variables:
   GIT_DEPTH: 0
@@ -31,7 +33,7 @@ before_script:
   - cp copier.yaml src/init_python_project/.
   # creating example projects using copier requires a git identity
   - git config --global user.name "ci-runner"
-  - git config --global user.email "ci-runner@git01.iis.fhg.de"
+  - git config --global user.email "ci-runner@gitlab.cc-asp.fraunhofer.de"
 
 dist:
   stage: build

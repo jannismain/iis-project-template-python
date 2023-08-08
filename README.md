@@ -26,7 +26,7 @@ Everything comes pre-configured with sensible defaults so you can focus on your 
 
 See this [sample project][] to see how projects generated from this template using default values look like.
 
-[sample project]: https://git01.iis.fhg.de/mkj/sample-project
+[sample project]: https://gitlab.cc-asp.fraunhofer.de/mkj/sample-project
 
 ## Getting Started
 
@@ -42,12 +42,12 @@ See this [sample project][] to see how projects generated from this template usi
 ### Usage
 
 ```console
-copier copy --trust https://git01.iis.fhg.de/mkj/project-template.git my_new_project
+copier copy --trust https://gitlab.cc-asp.fraunhofer.de/mkj/project-template.git my_new_project
 ```
 
 *Note: `--trust` is required because the template uses [tasks][] to setup your git repository for you.*
 
-[tasks]: https://git01.iis.fhg.de/mkj/project-template/-/blob/main/copier.yaml
+[tasks]: https://gitlab.cc-asp.fraunhofer.de/mkj/project-template/-/blob/main/copier.yaml
 
 <!-- usage-end -->
 
@@ -55,16 +55,16 @@ copier copy --trust https://git01.iis.fhg.de/mkj/project-template.git my_new_pro
 
 The first part of the [user guide][] consists of tutorials on how to answer the template questions for [Your First Project][], what [Next Steps][] there are after your project is created and why the [Project Structure][] looks like it does.
 
-[user guide]: https://mkj.git01.iis.fhg.de/project-template/user-guide/
-[your first project]: https://mkj.git01.iis.fhg.de/project-template/user-guide/first-project
-[next steps]: https://mkj.git01.iis.fhg.de/project-template/user-guide/first-project
-[project structure]: https://mkj.git01.iis.fhg.de/project-template/user-guide/project-structure
+[user guide]: https://mkj.pages.fraunhofer.de/project-template/user-guide/
+[your first project]: https://mkj.pages.fraunhofer.de/project-template/user-guide/first-project
+[next steps]: https://mkj.pages.fraunhofer.de/project-template/user-guide/first-project
+[project structure]: https://mkj.pages.fraunhofer.de/project-template/user-guide/project-structure
 
 The second part of the user guide explains how best practices, like [testing][], [documentation][], and [continuous integration][], are implemented in this template.
 
-[testing]: https://mkj.git01.iis.fhg.de/project-template/user-guide/topics/testing
-[documentation]: https://mkj.git01.iis.fhg.de/project-template/user-guide/topics/documentation
-[continuous integration]: https://mkj.git01.iis.fhg.de/project-template/user-guide/topics/ci
+[testing]: https://mkj.pages.fraunhofer.de/project-template/user-guide/topics/testing
+[documentation]: https://mkj.pages.fraunhofer.de/project-template/user-guide/topics/documentation
+[continuous integration]: https://mkj.pages.fraunhofer.de/project-template/user-guide/topics/ci
 
 ## Known Issues
 
