@@ -6,3 +6,5 @@ __pycache__/
 !.vscode/extensions.json
 *.egg-info
 build
+.obsidian
+docs/examples
