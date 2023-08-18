@@ -11,9 +11,10 @@ import pathlib
 import re
 import subprocess
 import unicodedata
-from typing import List, Tuple, Union
 
 import pymdownx.magiclink
+import tomllib
+import yaml
 from mkdocs_macros.plugin import MacrosPlugin
 
 # patch for private gitlab instance
@@ -61,12 +62,25 @@ def define_env(env: MacrosPlugin):
             prev = c
         return r
 
+    env.macro(read_toml)
+    env.macro(read_yaml)
     env.macro(get_files)
-    env.macro(list_directory)
     env.macro(run)
 
 
-def get_files(directory: str | pathlib.Path, match: str = "", ignore: str = "") -> List[str]:
+def read_toml(filepath: pathlib.Path):
+    filepath = pathlib.Path(filepath)
+    with filepath.open("rb") as f:
+        return tomllib.load(f)
+
+
+def read_yaml(filepath: pathlib.Path):
+    filepath = pathlib.Path(filepath)
+    with filepath.open("r") as f:
+        return yaml.safe_load(f)
+
+
+def get_files(directory: str | pathlib.Path, match: str = "", ignore: str = "") -> list[str]:
     """Return list of files in *directory* that match the provided substring.
 
     Args:
@@ -91,25 +105,6 @@ def get_files(directory: str | pathlib.Path, match: str = "", ignore: str = "") 
     return rv
 
 
-def list_directory(directory: str | pathlib.Path, hide_extension: bool = False, join: str = "\n", **kwargs) -> str:
-    """List files in given *directory* that match the provided substring.
-
-    Uses [`get_files`][macros.get_files] to retrieve list of files
-
-    Args:
-        directory: path to directory
-        hide_extension: strip extension from filename
-        join: string to join filenames together with
-
-    Returns:
-        files in directory
-    """
-    files = get_files(directory=directory, **kwargs)
-    if hide_extension:
-        files = [pathlib.Path(file).stem for file in files]
-    return join.join(files)
-
-
 fp_cli_command_output_cache = root / "build" / ".docs_cache"
 fp_cli_command_output_cache.mkdir(parents=True, exist_ok=True)
 
@@ -121,6 +116,7 @@ def run(
     show_command=True,
     skip_cache=False,
     should_exit_with_error=False,
+    cwd=None,
 ):
     if setup is None:
         setup = []
@@ -133,15 +129,24 @@ def run(
 
     if skip_cache or not fp_cached_command.is_file():
         log.info("Generating output for: %s", " ".join(setup) + " " + " ".join(command))
+        kwargs = {}
+        if cwd is not None:
+            cwd = root / pathlib.Path(cwd)
+            kwargs["cwd"] = cwd
         result = subprocess.run(
             [*setup, *command],
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             check=not should_exit_with_error,  # use to catch issues with any cli command
+            **kwargs,
         )
         rv = result.stdout
-        if result.returncode != 0 and not should_exit_with_error:  # We check ourselves, in order to log the output
-            log.error(f"{' '.join(setup)} {' '.join(command)} failed with return code {result.returncode}")
+        if (
+            result.returncode != 0 and not should_exit_with_error
+        ):  # We check ourselves, in order to log the output
+            log.error(
+                f"{' '.join(setup)} {' '.join(command)} failed with return code {result.returncode}"
+            )
             log.error(rv.decode())
         fp_cached_command.open("wb").write(rv)
 

@@ -47,6 +47,23 @@ example-clean-gitlab-fhg:
 example-clean-gitlab-iis:
 	rm -rf build/example_gitlab_iis && mkdir -p build/example_gitlab_iis
 
+MKDOCS_CMD?=build
+MKDOCS_ARGS?=
+docs-live:
+	$(MAKE) docs MKDOCS_CMD=serve
+docs: docs-example-mkdocs docs-example-sphinx docs-example-default
+	mkdocs $(MKDOCS_CMD) $(MKDOCS_ARGS)
+docs-example-mkdocs:
+	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "docs=mkdocs" . docs/examples/mkdocs
+docs-example-sphinx:
+	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "docs=sphinx" . docs/examples/sphinx
+docs-example-default:
+	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} . docs/examples/default
+docs-clean:
+	rm -rf docs/examples public
+docs-clean-cache:
+	rm -rf build/.docs_cache
+
 .PHONY: test
 PYTEST_ARGS=-n auto
 test:

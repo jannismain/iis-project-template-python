@@ -4,8 +4,9 @@ repo_url: https://git01.iis.fhg.de/mkj/iis-project-template
 repo_name: iis-project-template
 site_url: http://mkj.git01.iis.fhg.de/iis-project-template
 edit_uri: -/edit/main/docs/
+site_dir: build/docs
 
-theme:
+theme: # https://squidfunk.github.io/mkdocs-material/setup/
   name: material
   icon:
     logo: material/satellite-variant
@@ -17,6 +18,7 @@ theme:
     - navigation.top
     - navigation.tabs
     - navigation.sections
+    - navigation.prune
     - content.code.annotate
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -24,14 +26,14 @@ theme:
       primary: teal
       accent: deep orange
       toggle:
-        icon: material/toggle-switch-off-outline
+        icon: material/weather-sunny
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: teal
       accent: amber
       toggle:
-        icon: material/toggle-switch
+        icon: material/weather-night
         name: Switch to light mode
 
 plugins:
@@ -50,6 +52,15 @@ plugins:
       module_name: docs/util/macros
       modules: [includex]
   - autorefs
+  - tags:
+      enabled: !ENV [CI, true]
+  - bibtex:
+      bib_file:
+        !ENV [
+          "ZOTERO_URL_BIBFILE",
+          "https://api.zotero.org/users/4205132/collections/4WJ6DCJU/items?key=6iOAT50AdpQATcJF9SU7Qxto&format=bibtex",
+          "docs/assets/references.bib",
+        ]
 
 markdown_extensions:
   - abbr
@@ -57,6 +68,7 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.snippets:
       check_paths: true
+      url_download: true
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.superfences:
@@ -67,8 +79,8 @@ markdown_extensions:
   - pymdownx.magiclink:
       hide_protocol: True
       provider: gitlab
-      user: atria
-      repo: rfcomponent-chain-python
+      user: mkj
+      repo: project-template
       repo_url_shortener: True
       repo_url_shorthand: True
   - footnotes
@@ -81,7 +93,7 @@ markdown_extensions:
       marker: ""
       permalink: "#"
       permalink_title: "Link to this section"
-      toc_depth: "2-3"
+      toc_depth: 3
   - attr_list
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji

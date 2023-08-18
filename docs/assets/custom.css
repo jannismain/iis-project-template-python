@@ -11,7 +11,7 @@ img+em {
 .md-typeset .caption,
 .md-typeset figcaption {
     /* same as material's figcaption */
-    font-style: normal;
+    font-style: italic;
     max-width: 24rem;
     margin: 1em auto 1.5em;
     text-align: center;

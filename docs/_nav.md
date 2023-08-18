@@ -1,0 +1,9 @@
+- [Home](./index.md)
+- [User Guide](./user-guide/index.md)
+    - [Project Structure](./user-guide/structure.md)
+    - [Task Execution](./user-guide/task-execution.md)
+    - [Setup](./user-guide/setup/)
+    - [Testing](./user-guide/testing/)
+    - [Documentation](./user-guide/documentation/)
+    - user-guide/*
+- [Developer Guide](./developer-guide/)
