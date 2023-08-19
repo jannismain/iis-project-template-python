@@ -49,9 +49,3 @@ remote_url:
 default_branch:
   type: str
   default: main
-
-_tasks:
-  - "rm -rf context"
-  - "git init -b {{default_branch}}"
-  - "git remote add origin {{remote_url}} || true"
-  - "{% if use_precommit %}pre-commit install || echo 'Error during installation of pre-commit hooks. Is pre-commit installed?'{% endif %}"

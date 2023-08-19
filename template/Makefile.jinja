@@ -1,3 +1,12 @@
+.PHONY: init
+init:
+	rm -f context
+	git init -b {{default_branch}} || echo 'Error during initialisation of git repository.'
+	git remote add origin {{remote_url}} || echo 'Error when trying to add remote to git repository.'
+	{% if use_precommit -%}
+	pre-commit install || echo 'Error during installation of pre-commit hooks. Is pre-commit installed?'
+	{%- endif %}
+
 .PHONY: install-dev
 install-dev:	## install project including all development dependencies
 	pip install -e .[test,doc,dev]

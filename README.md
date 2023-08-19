@@ -27,14 +27,18 @@ See this [sample project](https://git01.iis.fhg.de/mkj/sample-project) to see ho
 ### Usage
 
 ```console
-copier copy --trust https://git01.iis.fhg.de/mkj/project-template.git my_new_project
+copier copy https://git01.iis.fhg.de/mkj/project-template.git my_new_project
 ```
 
-*Note: `--trust` is required because the template uses [tasks][] to setup your git repository for you.*
-
-[tasks]: https://git01.iis.fhg.de/mkj/project-template/-/blob/main/copier.yaml
-
 ### Next Steps
+
+#### Initialise your project
+
+```sh
+make init
+```
+
+You only have to do this when you create a new project.
 
 #### Configure Remote Repository
 

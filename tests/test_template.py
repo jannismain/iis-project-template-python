@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from subprocess import check_output
+from tabnanny import check
 
 import pytest
 import yaml
@@ -53,7 +54,6 @@ def test_template_generation(
             remote=remote,
         ),
         defaults=True,
-        unsafe=True,
     )
 
     fp_readme = tmp_path / "README.md"
@@ -72,6 +72,9 @@ def test_template_generation(
 
     fp_bumpversion_config = tmp_path / ".bumpversion.cfg"
     assert fp_bumpversion_config.is_file() == use_bumpversion
+
+    os.chdir(tmp_path)
+    check_output(["make", "init"])
 
     fp_git = tmp_path / ".git"
     assert fp_git.is_dir(), "new projects should be git repositories"
@@ -93,7 +96,6 @@ def test_template_generation(
         '[remote "origin"]' in git_config
     ), "new projects should have a remote repository configured"
 
-    os.chdir(tmp_path)
     check_output(["git", "add", "."])
     check_output(["git", "commit", "-m", "initial commit"])
 
@@ -130,10 +132,10 @@ def test_default_branch_option(tmp_path: Path):
             project_name="Sample Project",
             user_name="mkj",
         ),
-        unsafe=True,
         defaults=True,
         user_defaults={"default_branch": default_branch},
     )
+    check_output(["make", "init"], cwd=str(tmp_path))
     assert (
         check_output(["git", "status", "--branch", "--porcelain"], cwd=str(tmp_path))
         .decode()
@@ -156,9 +158,9 @@ def test_remote_option(tmp_path: Path, remote: str):
             remote=remote,
             user_name=user_name,
         ),
-        unsafe=True,
         defaults=True,
     )
+    check_output(["make", "init"], cwd=str(tmp_path))
 
     git_remote_output = check_output(["git", "remote", "-v"], cwd=str(tmp_path)).decode()
     branch, remote_url, _ = git_remote_output.split("\n")[0].split()
@@ -191,7 +193,6 @@ def test_docs_option(venv: VirtualEnvironment, tmp_path: Path, docs: str):
             docs=docs,
         ),
         defaults=True,
-        unsafe=True,
     )
 
     if docs == "mkdocs":
@@ -237,7 +238,6 @@ def test_publish_docs_ci(venv: VirtualEnvironment, tmp_path: Path, docs: str, re
             remote=remote,
         ),
         defaults=True,
-        unsafe=True,
     )
 
     ci_platform = "gitlab" if remote.startswith("gitlab") else remote
