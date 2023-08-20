@@ -13,7 +13,7 @@ build_example:
     - 2-add-user-guide
 
 publish_example:
-  stage: publish
+  stage: build
   script:
     - cd example
     - git init
@@ -30,7 +30,7 @@ pages:
   script:
     - pip install -r requirements.txt
     - make docs
-    - mv build/
+    - mv build public
   artifacts:
     paths:
       - public

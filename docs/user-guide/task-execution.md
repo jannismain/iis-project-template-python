@@ -13,7 +13,7 @@ This project template relies on [GNU make][make intro] as a task runner. While i
 ??? example "Example Makefile"
 
     ```Makefile
-    --8<-- "https://gitlab.cc-asp.fraunhofer.de/mkj/project-template/-/raw/main/Makefile"
+    --8<-- "docs/examples/default/Makefile"
     ```
 
 ```console

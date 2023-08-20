@@ -9,8 +9,8 @@ magiclink
 mkdocs
 mkdocstrings
 octicons
-Ousterhout
 ousterhout
+Ousterhout
 pipenv
 pipx
 precommit

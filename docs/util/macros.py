@@ -1,6 +1,6 @@
 """Documentation macros.
 
-See the [`mkdocs-macros-plugin` Documentation](https://mkdocs-macros-plugin.readthedocs.io/) for more information.
+[`mkdocs-macros-plugin` Documentation](https://mkdocs-macros-plugin.readthedocs.io/)
 """
 
 import hashlib

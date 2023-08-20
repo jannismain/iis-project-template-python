@@ -49,16 +49,16 @@ example-clean-gitlab-iis:
 
 MKDOCS_CMD?=build
 MKDOCS_ARGS?=
+docs: docs/examples/mkdocs docs/examples/sphinx docs/examples/default
+	mkdocs $(MKDOCS_CMD) $(MKDOCS_ARGS)
 docs-live:
 	$(MAKE) docs MKDOCS_CMD=serve
-docs: docs-example-mkdocs docs-example-sphinx docs-example-default
-	mkdocs $(MKDOCS_CMD) $(MKDOCS_ARGS)
-docs-example-mkdocs:
-	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "docs=mkdocs" . docs/examples/mkdocs
-docs-example-sphinx:
-	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "docs=sphinx" . docs/examples/sphinx
-docs-example-default:
-	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} . docs/examples/default
+docs/examples/mkdocs:
+	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "user_name=mkj" -d "docs=mkdocs" . docs/examples/mkdocs
+docs/examples/sphinx:
+	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "user_name=mkj" -d "docs=sphinx" . docs/examples/sphinx
+docs/examples/default:
+	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "user_name=mkj" . docs/examples/default
 docs-clean:
 	rm -rf docs/examples public
 docs-clean-cache:
@@ -74,7 +74,7 @@ cspell-ci:
 	cspell --no-cache ${CSPELL_ARGS} ${CSPELL_FILES}
 cspell-dump:
 	cspell ${CSPELL_ARGS} ${CSPELL_FILES} --words-only >> ${DICT_FILE}
-	sort --ignore-case --output=${DICT_FILE} ${DICT_FILE}
+	sort --ignore-case -s --output=${DICT_FILE} ${DICT_FILE}
 
 .PHONY: test
 PYTEST_ARGS=-n auto

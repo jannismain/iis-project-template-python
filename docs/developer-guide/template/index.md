@@ -1,3 +1,5 @@
+# Template
+
 This template is built using [copier][].
 
 The `_subdirectory` is set to *template*, so that the template files are separated from other project files:

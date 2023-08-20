@@ -25,7 +25,7 @@ MkDocs is configured in the `mkdocs.yml` file in the root of your project.
 
 [:octicons-mark-github-16: Repository][mkdocs-macros-github] :octicons-dash-24: [:octicons-book-16: Documentation][mkdocs-macros-docs]
 
-Use [jinja][] templating expressions in your markdown documentation.
+Use [Jinja][] template expressions in your markdown documentation.
 
 [jinja]: https://jinja.palletsprojects.com/templates/
 
