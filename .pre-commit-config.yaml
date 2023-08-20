@@ -17,3 +17,16 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [push]
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v7.0.0
+    hooks:
+      - id: cspell
+        name: check spelling (cspell)
+        args:
+          [
+            --show-suggestions,
+            --show-context,
+            --no-must-find-files,
+            --config,
+            .vscode/cspell.json,
+          ]

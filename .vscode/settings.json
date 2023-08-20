@@ -3,15 +3,9 @@
   "python.testing.pytestArgs": ["tests"],
   "python.testing.unittestEnabled": false,
   "python.testing.pytestEnabled": true,
-  "cSpell.words": [
-    "bumpversion",
-    "docstrings",
-    "mkdocs",
-    "mkdocstrings",
-    "precommit",
-    "pyproject",
-    "pytest",
-    "setuptools",
-    "venv"
-  ]
+  // Spell checking
+  "cSpell.enabled": true, // required, otherwise cspell status bar item will show disabled state
+  "cSpell.language": "en-US",
+  "cSpell.import": ["${workspaceFolder}/.vscode/cspell.json"],
+  "cSpell.enableFiletypes": ["shellscript", "toml"]
 }

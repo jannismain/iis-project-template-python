@@ -1,0 +1,36 @@
+{
+  "version": "0.2",
+  "enabled": true,
+  "ignorePaths": [
+    "Makefile",
+    ".vscode",
+    ".gitignore",
+    ".gitlab-ci.yml",
+    ".pre-commit-config.yaml",
+    "mkdocs.yaml",
+    "template",
+    "pyproject.toml",
+    "references.bib",
+    "requirements.txt"
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-terms",
+      "path": "terms.txt",
+      "description": "Project-related terms",
+      "addWords": true
+    }
+  ],
+  "note": "List of built-in dictionaries: https://cspell.org/docs/dictionaries/",
+  "dictionaries": ["project-terms", "python"],
+  "ignoreWords": [],
+  "language": "en-US",
+  "useGitignore": true,
+  "overrides": [
+    {
+      // Case sensitive markdown in the docs folder
+      "filename": "docs/**/*.md",
+      "caseSensitive": true
+    }
+  ]
+}

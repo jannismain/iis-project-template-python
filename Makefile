@@ -64,6 +64,18 @@ docs-clean:
 docs-clean-cache:
 	rm -rf build/.docs_cache
 
+.PHONY: cspell cspell-ci
+CSPELL_ARGS=--show-suggestions --show-context --config ".vscode/cspell.json" --unique
+CSPELL_FILES="**/*.*"
+DICT_FILE=.vscode/terms.txt
+cspell: ## check spelling using cspell
+	cspell ${CSPELL_ARGS} ${CSPELL_FILES}
+cspell-ci:
+	cspell --no-cache ${CSPELL_ARGS} ${CSPELL_FILES}
+cspell-dump:
+	cspell ${CSPELL_ARGS} ${CSPELL_FILES} --words-only >> ${DICT_FILE}
+	sort --ignore-case --output=${DICT_FILE} ${DICT_FILE}
+
 .PHONY: test
 PYTEST_ARGS=-n auto
 test:
