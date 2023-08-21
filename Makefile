@@ -51,6 +51,7 @@ example-clean-gitlab-iis:
 example-clean-manual:
 	rm -rf build/example_manual && mkdir -p build/example_manual
 
+.PHONY: docs docs-live docs-clean docs-clean-cache
 MKDOCS_CMD?=build
 MKDOCS_ARGS?=
 docs: docs/examples/mkdocs docs/examples/sphinx docs/examples/default
