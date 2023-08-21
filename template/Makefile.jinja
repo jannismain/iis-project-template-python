@@ -19,12 +19,12 @@ coverage-ci:
 lint:	## run static code checks
 	@ruff src tests
 
-{% if docs != 'none' %}
+{% if docs != 'none' -%}
+.PHONY: docs docs-live
 DOCS_TARGET?=build/docs
 {%- if docs == 'mkdocs' %}
 MKDOCS_BIN?=mkdocs
-{% endif %}
-.PHONY: docs docs-live
+{%- endif %}
 docs:	## build documentation
 {%- if docs == 'mkdocs' %}
 	${MKDOCS_BIN} build --site-dir ${DOCS_TARGET}/html
