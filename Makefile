@@ -2,6 +2,7 @@ USER_NAME?=jannismain
 REMOTE?=github
 REMOTE_URL?=git@github.com:jannismain/python-project-template-example.git
 
+# These targets are used to push examples to all supported remotes
 examples: example-github example-gitlab-fhg example-gitlab-iis
 example-github: example-clean-github example example-setup
 example-gitlab-fhg: example-clean-gitlab-fhg
@@ -11,13 +12,14 @@ example-gitlab-iis: example-clean-gitlab-iis
 	$(MAKE) example USER_NAME=mkj REMOTE=gitlab-iis REMOTE_URL=git@git01.iis.fhg.de:mkj/sample-project.git
 	$(MAKE) example-setup REMOTE=gitlab-iis
 
-example-manual: example-clean
-	copier copy ${COPIER_ARGS} -d "project_name=Sample Project" -d "package_name=sample_project" . ./example
-	$(MAKE) example-setup
+# This target can be used for ad-hoc manual testing
+example-manual: example-clean-manual
+	copier copy ${COPIER_ARGS} -d "project_name=Sample Project" -d "package_name=sample_project" -d "user_name=mkj" . ./build/example_manual
+	$(MAKE) example-setup EXAMPLE_DIR=./build/example_manual
 
 COPIER_ARGS?=--trust
 COPIER_DEFAULT_VALUES?=-d "project_name=Sample Project" -d "package_name=sample_project" --defaults
-EXAMPLE_DIR=./build/example_$(subst -,_,$(REMOTE))
+EXAMPLE_DIR?=./build/example_$(subst -,_,$(REMOTE))
 example:
 	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} -d "user_name=${USER_NAME}" -d "remote=${REMOTE}" -d "remote_url=${REMOTE_URL}" . ${EXAMPLE_DIR}
 
@@ -46,6 +48,8 @@ example-clean-gitlab-fhg:
 	rm -rf build/example_gitlab_fhg && mkdir -p build/example_gitlab_fhg
 example-clean-gitlab-iis:
 	rm -rf build/example_gitlab_iis && mkdir -p build/example_gitlab_iis
+example-clean-manual:
+	rm -rf build/example_manual && mkdir -p build/example_manual
 
 MKDOCS_CMD?=build
 MKDOCS_ARGS?=
