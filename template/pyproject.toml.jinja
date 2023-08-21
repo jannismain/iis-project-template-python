@@ -11,19 +11,19 @@
 # There are some restrictions on what makes a valid project name
 # specification here:
 # https://packaging.python.org/specifications/core-metadata/#name
-name = "{{project_name | lower | replace(' ', '-') }}" # Required
+name = "{{project_name | lower | replace(' ', '-') }}" # required
 
 # Versions should comply with PEP 440:
 # https://www.python.org/dev/peps/pep-0440/
 #
 # For a discussion on single-sourcing the version, see
 # https://packaging.python.org/guides/single-sourcing-package-version/
-version = "0.0.1" # Required
+version = "0.0.1" # required
 
 # This is a one-line description or tagline of what your project does. This
 # corresponds to the "Summary" metadata field:
 # https://packaging.python.org/specifications/core-metadata/#summary
-description = "" # Optional
+description = "" # optional
 
 # This is an optional longer description of your project that represents
 # the body of text which users will see when they visit PyPI.
@@ -33,7 +33,7 @@ description = "" # Optional
 #
 # This field corresponds to the "Description" metadata field:
 # https://packaging.python.org/specifications/core-metadata/#description-optional
-readme = "README.md" # Optional
+readme = "README.md" # optional
 
 # Specify which Python versions you support. In contrast to the
 # 'Programming Language' classifiers above, 'pip install' will check this
@@ -41,18 +41,16 @@ readme = "README.md" # Optional
 # https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
 requires-python = ">=3.7"
 
-# This should be your name or the name of the organization who originally
-# authored the project, and a valid email address corresponding to the name
-# listed.
+# Name or names of the individual or organization which originally authored
+# the project, and a valid email address corresponding to the name listed.
 authors = [
-  { name = "{{user_name}}", email = "{{user_name}}@iis.fhg.de" }, # Optional
+  { name = "{{user_name}}", email = "{{user_name}}@iis.fhg.de" },
 ]
 
-# This should be your name or the names of the organization who currently
-# maintains the project, and a valid email address corresponding to the name
-# listed.
+# Name or names of the individual or organization which currently maintains
+# the project, and a valid email address corresponding to the name listed.
 maintainers = [
-  { name = "{{user_name}}", email = "{{user_name}}@iis.fhg.de" }, # Optional
+  { name = "{{user_name}}", email = "{{user_name}}@iis.fhg.de" },
 ]
 
 # This field lists other packages that your project depends on to run.
@@ -61,7 +59,7 @@ maintainers = [
 #
 # For an analysis of this field vs pip's requirements files see:
 # https://packaging.python.org/discussions/install-requires-vs-requirements/
-dependencies = ["click"] # Optional
+dependencies = ["click"]
 
 # List additional groups of dependencies here (e.g. development
 # dependencies). Users will be able to install these using the "extras"
@@ -71,7 +69,7 @@ dependencies = ["click"] # Optional
 #
 # Similar to `dependencies` above, these must be valid existing
 # projects.
-[project.optional-dependencies] # Optional
+[project.optional-dependencies]
 dev = ["black", "radon", "ruff"]
 test = ["pytest", "pytest-cov", "coverage[toml]"]
 {% if docs!="none" -%}
@@ -93,7 +91,7 @@ doc = [
 
 # The following would provide a command line executable which executes
 # the function `main` from this package's cli module when invoked.
-[project.scripts] # Optional
+[project.scripts] # optional
 {{ ctx.cli_command }} = "{{package_name}}.cli:main"
 
 # This is configuration specific to the `setuptools` build backend.
@@ -115,7 +113,6 @@ source = ["src", "tests"]
 
 [tool.coverage.report]
 omit = ["**/setup.py", "**/__init__.py", "**/__main__.py"]
-
 exclude_lines = ["if __name__ == .__main__."]
 
 [tool.coverage.html]
@@ -134,12 +131,15 @@ src = ["src", "tests"]
 ignore = ["E501", "D1"]
 # E501: line length violations
 # D1XX: missing docstring
+
 [tool.ruff.pydocstyle]
 convention = "google"
+
 [tool.ruff.mccabe]
 # Flag errors (`C901`) whenever the complexity level exceeds 5.
 max-complexity = 5
 # Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
+
 [tool.ruff.per-file-ignores]
 "__init__.py" = ["E402"]
 "docs/source/conf.py" = ["E402"]
