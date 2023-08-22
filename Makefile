@@ -3,7 +3,7 @@ DOC_EXAMPLES = docs/examples/mkdocs docs/examples/sphinx docs/examples/default
 COPIER_ARGS?=--trust
 COPIER_DEFAULT_VALUES=-d "project_name=Sample Project" -d "package_name=sample_project"
 
-.PHONY: examples $(PUBLISHED_EXAMPLES) $(DOC_EXAMPLES) example-setup example-setup-commit example-setup-local example examples-clean
+.PHONY: examples $(PUBLISHED_EXAMPLES) example-setup example-setup-commit example-setup-local example examples-clean
 
 examples: ## build all published examples
 examples: $(PUBLISHED_EXAMPLES)
@@ -70,8 +70,6 @@ docs-clean:
 	rm -rf docs/examples public
 docs-clean-cache:
 	rm -rf build/.docs_cache
-
-
 
 
 .PHONY: cspell cspell-ci
