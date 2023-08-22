@@ -7,5 +7,9 @@
   "cSpell.enabled": true, // required, otherwise cspell status bar item will show disabled state
   "cSpell.language": "en-US",
   "cSpell.import": ["${workspaceFolder}/.vscode/cspell.json"],
-  "cSpell.enableFiletypes": ["shellscript", "toml"]
+  "cSpell.enableFiletypes": ["shellscript", "toml"],
+  // Prettier
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
