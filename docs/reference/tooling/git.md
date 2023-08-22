@@ -4,3 +4,5 @@
 
 [git]: https://git-scm.com/
 [git-docs]: https://git-scm.com/doc
+
+## git hooks

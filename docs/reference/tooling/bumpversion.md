@@ -2,7 +2,7 @@
 tags: [Release]
 ---
 
-# bump2version
+# bumpversion
 
 [:octicons-mark-github-16: Repository][bumpversion]
 

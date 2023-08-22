@@ -4,21 +4,46 @@ project_name:
   type: str
   help: What is the name of your project?
   placeholder: Sample Project
+  explanation: |
+    The project name will be used to propose a suitable package name and [Remote Url][remote-url].
+    It is also repeated in multiple places (Python package configuration, documentation, etc.).
 
 package_name:
   type: str
   help: What is the name of your Python package?
   default: "{{ project_name|lower|replace(' ', '_')|replace('-', '_') }}"
+  explanation: |
+    This is the name of your Python package. As such, it will be used as the name of the directory containing your code.
+    All imports of your package start with this name.
+
+    The example cli included with this template will be named after this.
+
+    Finally, the package name is repeated across multiple configuration and documentation files.
 
 use_precommit:
   type: bool
   default: true
   help: Use pre-commit to run checks on each commit?
+  explanation: |
+    [pre-commit](../../reference/tooling/pre-commit) is a tool that makes configuring [git hooks][git-hooks] a lot easier.
+
+    This template uses pre-commit hooks to ensure, all changes match the expected formatting and style.
+    Additionally, running linters at this stage can prevent committing something that contains obvious issues.
+
+    Most formatters and some linters are able to fix issues automatically.
+    So you can simply review the changes those tools made, stage them and commit again.
 
 use_bumpversion:
   type: bool
   default: false
   help: Use bumpversion to manage semantic version across multiple files?
+  explanation: |
+    If you want to version your project, [bumpversion][] provides an easy way to increase version numbers across multiple files.
+
+    It integrates with git and helps with your release workflow by automating version bump, commit and tag creation.
+    Used correctly, releasing a new version of your project can be done with a single command.
+
+    It also helps to follow [semantic versioning][semantic-versioning] guidelines when increasing your version numbers.
 
 docs:
   type: str
@@ -28,7 +53,20 @@ docs:
     None: none
   default: "mkdocs"
   help: Which documentation tool do you want to use?
+  explanation: |
+    [Documentation][documentation] is an important part of any project.
 
+    So far, this template supports two documentation tools: [MkDocs][mkdocs] and [Sphinx][sphinx].
+
+    [MkDocs][mkdocs] is a great tool to quickly get started with documentation.
+    It is easy to use and provides a great looking documentation with minimal overhead.
+    However, it is not as flexible as Sphinx and does not support as many features.
+
+    [Sphinx][sphinx] is a more powerful tool that is used by many large projects.
+    It is more complex to use and requires more boilerplate and configuration.
+    However, it is also more flexible and supports more features.
+
+    If you are not sure which tool to use, simply go with the default 😉.
 remote:
   choices:
     GitHub: github
@@ -45,6 +83,15 @@ remote_url:
   type: str
   help: URL of the remote repository
   default: git@{% if remote=='github' %}github.com{% elif remote=='gitlab-iis' %}git01.iis.fhg.de{% elif remote=='gitlab-fhg' %}gitlab.cc-asp.fraunhofer.de{% endif %}:{{user_name}}/{{project_name | lower | replace(' ', '-')}}.git
+  explanation: |
+    If provided, the template calculates many values that depend on the remote url (e.g. URL to your documentation).
+
+    If you did not create your remote repository yet (i.e. new project at GitHub or Gitlab), this might be a good time to do so.
+
+    !!! tip "Create empty repository"
+
+        Do not initialize your remote project with a LICENSE or README file.
+        This will let you push your initial commit without merge or rebase.
 
 default_branch:
   type: str
