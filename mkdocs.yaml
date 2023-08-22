@@ -1,15 +1,20 @@
 site_name: Project Template for Python
 
-repo_url: https://git01.iis.fhg.de/mkj/iis-project-template
+repo_url: https://git01.iis.fhg.de/mkj/project-template
 repo_name: iis-project-template
-site_url: http://mkj.git01.iis.fhg.de/iis-project-template
+site_url: http://mkj.git01.iis.fhg.de/project-template
 edit_uri: -/edit/main/docs/
 site_dir: build/docs
 
 theme: # https://squidfunk.github.io/mkdocs-material/setup/
   name: material
+  custom_dir: docs/assets/theme
   icon:
     logo: material/satellite-variant
+    tag:
+      doc: material/book-open-page-variant
+      test: material/test-tube
+      default: material/tag
   favicon: assets/material-satellite-variant.svg
   features:
     - navigation.instant
@@ -20,6 +25,7 @@ theme: # https://squidfunk.github.io/mkdocs-material/setup/
     - navigation.sections
     - navigation.prune
     - content.code.annotate
+    - toc.follow
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -54,6 +60,7 @@ plugins:
   - autorefs
   - tags:
       enabled: !ENV [CI, true]
+      tags_file: reference/tags.md
   - bibtex:
       bib_file:
         !ENV [
@@ -111,3 +118,12 @@ extra_css:
 
 extra:
   generator: false
+  URL_EXAMPLE_FILE:
+    !ENV [
+      URL_EXAMPLE_FILE,
+      https://git01.iis.fhg.de/mkj/sample-project/-/raw/main,
+    ]
+  tags:
+    Documentation: doc
+    Testing: test
+    Continuous Integration: ci

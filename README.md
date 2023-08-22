@@ -4,13 +4,13 @@ A customizable template for new Python projects to get you up and running with c
 
 ## Features
 
-* Each project has a [README][] and [CHANGELOG][] file and includes further documentation based on [Material for MkDocs][] or [Sphinx][].
-* [Testing][] and [continuous integration][ci] tooling are included from the very beginning
-  * Test coverage is collected and displayed as a badge
-  * Coverage report is integrated with [Gitlab's coverage report artifact][gitlab coverage report]
-* Projects use [pre-commit][] to ensure adherence to a [coding style][] on the client side
-* Projects use bumpversion to increase their version according to [semantic versioning guidelines][semver]
-* Python projects are installable
+- Each project has a [README][] and [CHANGELOG][] file and includes further documentation based on [Material for MkDocs][] or [Sphinx][].
+- [Testing][] and [continuous integration][ci] tooling are included from the very beginning
+    - Test coverage is collected and displayed as a badge
+    - Coverage report is integrated with [Gitlab's coverage report artifact][gitlab coverage report]
+- Projects use [pre-commit][] to ensure adherence to a [coding style][] on the client side
+- Projects use bumpversion to increase their version according to [semantic versioning guidelines][semver]
+- Python projects are installable
 
 Everything comes pre-configured with sensible defaults so you can focus on your implementation and let the template handle the rest.
 
@@ -34,9 +34,15 @@ copier copy --trust https://git01.iis.fhg.de/mkj/project-template.git my_new_pro
 
 [tasks]: https://git01.iis.fhg.de/mkj/project-template/-/blob/main/copier.yaml
 
+Should you need any help with the questions asked during project creation, head over to the [Your First Project](https://mkj.git01.iis.fhg.de/project-template/user-guide/first-project) section in the user guide.
+
 ### Next Steps
 
-#### Configure Remote Repository
+#### Enable CI
+
+On Gitlab remotes, CI Pipelines might need to be enabled by assigning a CI Runner to your project. Do this now so your CI pipeline doesn't get stuck after your first push.
+
+#### Push to Remote Repository
 
 During the project creation, you will be asked about the Gitlab remote url where your project will be pushed to. You can take that moment to create a new project in Gitlab and copy its link into the questionnaire. You can also change this value later by modifying the git remote associated with your project
 

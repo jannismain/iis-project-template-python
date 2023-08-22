@@ -1,13 +1,16 @@
 automodule
 bumpversion
+cyclomatic
 docstrings
 endfor
 Furo
 includex
+jannismain
 jimustafa
 magiclink
 mkdocs
 mkdocstrings
+myst
 octicons
 ousterhout
 Ousterhout

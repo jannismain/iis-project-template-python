@@ -1,9 +1,15 @@
-# Material for MkDocs
+---
+tags: [Documentation]
+---
+
+# MkDocs
+
+## Material for MkDocs
 
 [Material for MkDocs] is a theme for [MkDocs] that adds many features to build beautiful documentation on the web.
 
-![](https://cln.sh/NXcyx9Ws+)
-*Preview of Documentation built with Material for MkDocs*{.caption}
+![](https://cln.sh/MtfFQRS1+)
+*Documentation of example project built with Material for MkDocs*{.caption}
 
 Actually, this documentation happens to be built with Material for MkDocs too, so yours will likely look similar.
 
@@ -11,9 +17,9 @@ Actually, this documentation happens to be built with Material for MkDocs too, s
 
 MkDocs is configured in the `mkdocs.yml` file in the root of your project.
 
-??? example "`mkdocs.yml`"
+??? quote "`mkdocs.yml`"
 
-    {{includex("example/mkdocs.yml", indent=4, lang="yaml")}}
+    {{ includex("docs/examples/mkdocs/mkdocs.yml", indent=4, lang="yaml") }}
 
 ## Recommended Extensions
 

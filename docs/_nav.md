@@ -1,9 +1,10 @@
 - [Home](./index.md)
-- [User Guide](./user-guide/index.md)
-    - [Project Structure](./user-guide/structure.md)
-    - [Task Execution](./user-guide/task-execution.md)
-    - [Setup](./user-guide/setup/)
-    - [Testing](./user-guide/testing/)
-    - [Documentation](./user-guide/documentation/)
+- User Guide
+    - [Getting Started](./user-guide/getting-started.md)
+    - [Your First Project](./user-guide/first-project.md)
     - user-guide/*
-- [Developer Guide](./developer-guide/)
+    - Explanations
+        - user-guide/explanations/*
+- [Best Practices](./best-practice/)
+- [Reference](./reference/)
+- [Template Developer Guide](./developer-guide/)
