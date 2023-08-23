@@ -22,7 +22,7 @@
     }
   ],
   "note": "List of built-in dictionaries: https://cspell.org/docs/dictionaries/",
-  "dictionaries": ["project-terms", "python"],
+  "dictionaries": ["project-terms", "python", "html"],
   "ignoreWords": [],
   "language": "en-US",
   "useGitignore": true,

@@ -1,10 +1,11 @@
 - [Home](./index.md)
 - User Guide
     - [Getting Started](./user-guide/getting-started.md)
-    - [Your First Project](./user-guide/first-project.md)
+    - [Creating your first project](./user-guide/first-project.md)
+    - [About the project structure](./user-guide/project-structure.md)
     - user-guide/*
-    - Explanations
-        - user-guide/explanations/*
+    - Topics
+        - user-guide/topics/*
 - [Best Practices](./best-practice/)
 - [Reference](./reference/)
 - [Template Developer Guide](./developer-guide/)

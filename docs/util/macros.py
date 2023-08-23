@@ -67,6 +67,12 @@ def define_env(env: MacrosPlugin):
     env.macro(get_files)
     env.macro(run)
 
+    env.variables["questions"] = {
+        k: v
+        for k, v in read_yaml(root / "copier.yaml").items()
+        if not k.startswith("_") and "explanation" in v
+    }
+
 
 def read_toml(filepath: pathlib.Path):
     filepath = pathlib.Path(filepath)

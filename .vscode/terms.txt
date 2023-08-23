@@ -7,6 +7,7 @@ Furo
 includex
 jannismain
 jimustafa
+jinja
 magiclink
 mkdocs
 mkdocstrings

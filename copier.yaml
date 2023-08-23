@@ -4,6 +4,7 @@ project_name:
   type: str
   help: What is the name of your project?
   placeholder: Sample Project
+  expected: Title case string, can contain spaces
   explanation: |
     The project name will be used to propose a suitable package name and [Remote Url][remote-url].
     It is also repeated in multiple places (Python package configuration, documentation, etc.).
@@ -12,11 +13,41 @@ package_name:
   type: str
   help: What is the name of your Python package?
   default: "{{ project_name|lower|replace(' ', '_')|replace('-', '_') }}"
+  expected: Lowercase string, can contain underscores
   explanation: |
     This is the name of your Python package. As such, it will be used as the name of the directory containing your code.
     All imports of your package start with this name.
 
-    The example cli included with this template will be named after this.
+    Example: If you choose `sample_project` as your package name, your code files would be created in
+
+    ```
+    ./
+    ├── src
+    │   └── sample_project
+    │       ├── __init__.py
+    │       ├── __main__.py
+    │       └── some_module.py
+    ├── pyproject.toml
+    └── ...
+    ```
+
+    and your imports would look like this:
+
+    ```python
+    from sample_project import some_module
+    ```
+
+    You might want to consult [PEP 423 – Naming conventions and recipes related to packaging](https://peps.python.org/pep-0423/)
+    for guidance on Python package name conventions.
+
+    The cli command included with this template will be named after your package, only with dashes instead of underscores.
+    Following the example above, your cli would then be available as
+
+    ```console
+    $ sample-project --help
+    ```
+
+    If you ever want to publish your Python package to [PyPI](https://pypi.org), the package name has to be unique to be accepted there.
 
     Finally, the package name is repeated across multiple configuration and documentation files.
 
@@ -58,15 +89,14 @@ docs:
 
     So far, this template supports two documentation tools: [MkDocs][mkdocs] and [Sphinx][sphinx].
 
-    [MkDocs][mkdocs] is a great tool to quickly get started with documentation.
-    It is easy to use and provides a great looking documentation with minimal overhead.
-    However, it is not as flexible as Sphinx and does not support as many features.
+    [MkDocs][mkdocs] is a great documentation tool built around [Markdown][markdown].
+    It is easy to use and produces a great looking documentation website with minimal overhead and configuration.
 
-    [Sphinx][sphinx] is a more powerful tool that is used by many large projects.
-    It is more complex to use and requires more boilerplate and configuration.
-    However, it is also more flexible and supports more features.
+    [Sphinx][sphinx] is a powerful tool for documentation written in [Markdown][markdown] or [reStructuredText][restructuredtext].
+    With the [`myst_parser`][myst_parser] it is now (almost) possible to rely on Markdown only.
+    Choose this if you want to publish your documentation in multiple formats (e.g. PDF, HTML, ePub, ...).
 
-    If you are not sure which tool to use, simply go with the default 😉.
+    If you are not sure which one to use, simply go with the default 😉.
 remote:
   choices:
     GitHub: github
@@ -74,17 +104,33 @@ remote:
     IIS Gitlab: gitlab-iis
   help: Which platform will your project be hosted on?
   default: "github"
+  explanation: |
+    This template provides a CI configuration for either GitHub (Github Actions) or GitLab (Gitlab CI).
+
+    Also, the link to your documentation depends on which remote you choose.
+
+    If you want to push your project to multiple remotes, you can add them later.
 
 user_name:
   type: str
-  help: User name (e.g. the one used with your hosted git provider)
+  help: User name (the one you used with your hosted git provider)
+  explanation: |
+    This is the user name you are using with the remote provider you provided in the previous question.
+
+    Together with [remote][], it will be used to suggest a [remote url][remote-url] for your project.
 
 remote_url:
   type: str
   help: URL of the remote repository
   default: git@{% if remote=='github' %}github.com{% elif remote=='gitlab-iis' %}git01.iis.fhg.de{% elif remote=='gitlab-fhg' %}gitlab.cc-asp.fraunhofer.de{% endif %}:{{user_name}}/{{project_name | lower | replace(' ', '-')}}.git
+  expected: SSH URL to your remote repository
   explanation: |
-    If provided, the template calculates many values that depend on the remote url (e.g. URL to your documentation).
+    Apart from configuring the git remote for you, the remote URL is required to determine other values, such as
+
+    - Links in your README and CHANGELOG files
+    - Links to your documentation
+    - Link to your repository from your documentation
+    - ...
 
     If you did not create your remote repository yet (i.e. new project at GitHub or Gitlab), this might be a good time to do so.
 
@@ -93,12 +139,31 @@ remote_url:
         Do not initialize your remote project with a LICENSE or README file.
         This will let you push your initial commit without merge or rebase.
 
+    === "Gitlab"
+
+        ![](https://cln.sh/gwzwgtHH+)
+        *The SSH URL to your Gitlab repository can be found under the `Clone` dropdown (screenshot taken 23.08.23)*{.caption}
+
+
+    === "GitHub"
+
+        ![](https://cln.sh/SscJVB6N+)
+        *The SSH URL to your GitHub repository can be found under the `<> Code` dropdown menu (screenshot taken 23.08.23)*{.caption}
+
 default_branch:
   type: str
   default: main
+  help: Name of the initial git branch that will be created
+  expected: Lowercase string, can contain dashes
+  examples: [main, master, dev]
+  explanation: |
+    Name of the [initial branch][] of your new project.
 
+    This branch traditionally was called `master`, but is more often called `main` now.
+
+    [initial branch]: https://git-scm.com/docs/git-init#Documentation/git-init.txt---initial-branchltbranch-namegt
 _tasks:
   - "rm -rf context"
-  - "git init -b {{default_branch}}"
+  - "git init --initial-branch={{default_branch}}"
   - "git remote add origin {{remote_url}} || true"
   - "{% if use_precommit %}pre-commit install || echo 'Error during installation of pre-commit hooks. Is pre-commit installed?'{% endif %}"
