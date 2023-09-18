@@ -5,19 +5,19 @@ Depending on which options you selected, your project initially consists of the 
 === "minimal"
 
     ```
-    {{ run("tree", "-a", "-I", ".git", "-I", "*.egg-info", "-I", ".venv", "docs/examples/minimal/") | indent(4) }}
+    {{ run("tree -a -I .git -I *.egg-info -I .venv -I __pycache__ docs/examples/minimal/") | indent(4) }}
     ```
 
 === "default"
 
     ```
-    {{ run("tree", "-a", "-I", ".git", "-I", "*.egg-info", "-I", ".venv", "-I", "__pycache__", "docs/examples/default/") | indent(4) }}
+    {{ run("tree -a -I .git -I *.egg-info -I .venv -I __pycache__ docs/examples/default/") | indent(4) }}
     ```
 
 === "full"
 
     ```
-    {{ run("tree", "-a", "-I", ".git", "-I", "*.egg-info", "-I", ".venv", "docs/examples/full/") | indent(4) }}
+    {{ run("tree -a -I .git -I *.egg-info -I .venv -I __pycache__ docs/examples/full/") | indent(4) }}
     ```
 
 ## Python-specific files
@@ -25,7 +25,7 @@ Depending on which options you selected, your project initially consists of the 
 The Python project structure consists of the following elements
 
 ```
-{{ run("tree", "-L", "3", "-P", "*.py", "-I", "docs", "-P", "pyproject.toml", "--gitfile", ".gitignore", "--noreport", "docs/examples/default/") }}
+{{ run("tree -L 3 -P *.py -I docs -P pyproject.toml --gitfile .gitignore --noreport docs/examples/default/") }}
 ```
 
 * `pyproject.toml`: The main responsibility of this file is to declare the [build system][] needed to build your Python package (`[build-system]`) as well as package metadata (in the `[project]` section). However, many Python tools support reading their configuration from this file. These sections are prefixed by `[tool.*]`

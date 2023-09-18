@@ -2,7 +2,7 @@
 
 The version is defined in the `pyproject.toml` file:
 
-{{ includex("docs/examples/default/pyproject.toml", start_match="Version", end_match="version =", end_offset=1, lang="toml", caption=True)}}
+{{ includex("docs/examples/default/pyproject.toml", start_match="Version", end_match="version =", end_offset=1, code=True, caption=True)}}
 
 ## Semantic Versioning
 

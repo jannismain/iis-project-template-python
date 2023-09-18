@@ -6,13 +6,13 @@ This project uses MkDocs with the Material for MkDocs theme.
 
 ??? quote "`mkdocs.yaml` Configuration File"
 
-    {{ includex('mkdocs.yaml', indent=4, lang='yaml') }}
+    {{ includex('mkdocs.yaml', indent=4, code=True) }}
 
 ## Navigation
 
 The navigation is setup using [:octicons-cpu-24:`mkdocs-literate-nav`](https://github.com/oprypin/mkdocs-literate-nav) and managed in the `_nav.md` file:
 
-{{ includex('docs/_nav.md', lang='md') }}
+{{ includex('docs/_nav.md', code=True) }}
 
 ## Macros
 
@@ -20,6 +20,6 @@ The navigation is setup using [:octicons-cpu-24:`mkdocs-literate-nav`](https://g
 
 ??? quote "`docs/util/macros.py`"
 
-    {{ includex('docs/util/macros.py', indent=4, lang='py') }}
+    {{ includex('docs/util/macros.py', indent=4, code=True) }}
 
 [jinja]: https://jinja.palletsprojects.com/

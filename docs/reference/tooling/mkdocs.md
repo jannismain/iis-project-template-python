@@ -19,7 +19,7 @@ MkDocs is configured in the `mkdocs.yml` file in the root of your project.
 
 ??? quote "`mkdocs.yml`"
 
-    {{ includex("docs/examples/mkdocs/mkdocs.yml", indent=4, lang="yaml") }}
+    {{ includex("docs/examples/mkdocs/mkdocs.yml", indent=4, code=True) }}
 
 ## Extensions
 

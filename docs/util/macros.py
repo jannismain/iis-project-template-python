@@ -9,11 +9,12 @@ import logging
 import os
 import pathlib
 import re
+import shlex
 import subprocess
+import tomllib
 import unicodedata
 
 import pymdownx.magiclink
-import tomllib
 import yaml
 from mkdocs_macros.plugin import MacrosPlugin
 
@@ -116,7 +117,8 @@ fp_cli_command_output_cache.mkdir(parents=True, exist_ok=True)
 
 
 def run(
-    *command,
+    command,
+    *args,
     setup: list = None,
     skip_lines=0,
     show_command=False,
@@ -129,11 +131,13 @@ def run(
 
     # ensure arguments are all strings
     setup = [str(x) for x in setup]
-    command = [str(x) for x in command]
-
-    if command[0].startswith("$ "):
-        command[0] = command[0].replace("$ ", "")
+    if command.startswith("$ "):
+        command = command[1:]
         show_command = True
+    if " " in command:
+        command = shlex.split(command)
+    else:
+        command = [command, *[str(x) for x in args]]
 
     filename = _get_filename(command, setup, cwd)
     fp_cached_command = fp_cli_command_output_cache / filename

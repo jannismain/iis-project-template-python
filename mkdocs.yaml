@@ -13,6 +13,7 @@ theme: # https://squidfunk.github.io/mkdocs-material/setup/
     tag:
       doc: material/book-open-page-variant
       test: material/test-tube
+      vcs: octicons/git-branch-16
       default: material/tag
   favicon: assets/material-satellite-variant.svg
   features:
@@ -125,3 +126,4 @@ extra:
     Documentation: doc
     Testing: test
     Continuous Integration: ci
+    Version Control: vcs

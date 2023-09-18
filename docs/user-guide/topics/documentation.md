@@ -12,7 +12,7 @@ The `README` included with the template only covers the bare minimum (installati
 
 ??? quote "`README.md`"
 
-    {{ includex('docs/examples/default/README.md', indent=4, lang='md', replace=[("```", "'''")])}}
+    {{ includex('docs/examples/default/README.md', indent=4, code=True, replace=[("```", "'''")])}}
 
 For additional sections often found in READMEs, see [Make a README], this [README Generator] or explore [READMEs of popular GitHub projects].
 
@@ -26,7 +26,7 @@ The `CHANGELOG` included with the template follows the [keep a changelog][] form
 
 ??? quote "`CHANGELOG.md`"
 
-    {{ includex('docs/examples/default/CHANGELOG.md', indent=4, lang='md', replace=[("```", "'''")])}}
+    {{ includex('docs/examples/default/CHANGELOG.md', indent=4, code=True, replace=[("```", "'''")])}}
 
 [keep a changelog]: https://keepachangelog.com/en/1.1.0
 

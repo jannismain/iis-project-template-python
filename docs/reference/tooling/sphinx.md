@@ -22,7 +22,7 @@ Sphinx is configured via a `conf.py` file.
 
 ??? quote "`docs/conf.py`"
 
-    {{ includex('docs/examples/sphinx/docs/conf.py', indent=4, lang='py')}}
+    {{ includex('docs/examples/sphinx/docs/conf.py', indent=4, code=True)}}
 
 See [Sphinx Configuration](https://www.sphinx-doc.org/en/master/usage/configuration.html) for a list of supported options.
 

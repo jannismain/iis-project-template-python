@@ -13,18 +13,18 @@ This project template relies on [GNU make][make intro] as a task runner. While i
 An overview of the included Makefile targets and what they do can be obtained using `make help`:
 
 ```console
-{{ run('make', 'help', cwd='docs/examples/default') | replace('[36m', '') | replace('[0m', '')}}
+{{ run('make help', cwd='docs/examples/default') | replace('[36m', '') | replace('[0m', '')}}
 ```
 
 ### Installation
 
-{{ includex('docs/examples/default/Makefile', start_match='install-dev:', end_match='.PHONY', lang="Makefile") }}
+{{ includex('docs/examples/default/Makefile', start_match='install-dev:', end_match='.PHONY', code=True) }}
 
 The project is being installed in place (using pip's `-e` option) including all optional requirements (given in square brackets).
 
 The project template keeps development requirements as optional requirements of the Python package in the [pyproject.toml][], so these can be installed alongside the project.
 
-{{ includex('docs/examples/default/pyproject.toml', lang='toml', start_match='[project.optional-dependencies]', end_match='# ') }}
+{{ includex('docs/examples/default/pyproject.toml', code=True, start_match='[project.optional-dependencies]', end_match='# ') }}
 
 The advantage of this is that development dependencies are handled exactly the same as other dependencies. A possible downside of this approach is that these optional dependencies are also included in the package built for users. If this is undesirable, an alternative approach would be to keep development requirements in a separate file (e.g. `dev-requirements.txt`) or use tooling that manages development requirements (e.g. [pipenv][]).
 
@@ -43,12 +43,12 @@ A key aspect of maintainability is reducing accidental complexity[^1]. This mean
 
 [radon-docs]: https://beta.ruff.rs/docs/https://radon.readthedocs.io/
 
-{{ includex('docs/examples/default/Makefile', start_match='maintainability:', end_match='.PHONY', lang="Makefile") }}
+{{ includex('docs/examples/default/Makefile', start_match='maintainability:', end_match='.PHONY', code=True) }}
 
 One such tool to estimate complexity is [radon][], which can be used to calculate the average cyclomatic complexity (cc) for your project:
 
 ```console
-{{ run('make', 'maintainability', cwd='docs/examples/default', should_exit_with_error=True) }}
+{{ run('make maintainability', cwd='docs/examples/default', should_exit_with_error=True) }}
 ```
 
 [^1]: sometimes also called incidental complexity
@@ -58,7 +58,7 @@ One such tool to estimate complexity is [radon][], which can be used to calculat
 
 Another type of static analysis is code linting i.e. analyzing source code for potential errors, code style violations, and programming best practice adherence.
 
-{{ includex('docs/examples/default/Makefile', start_match='lint:', end_match='.PHONY', lang="Makefile") }}
+{{ includex('docs/examples/default/Makefile', start_match='lint:', end_match='.PHONY', code=True) }}
 
 ##### ruff
 
@@ -68,13 +68,13 @@ Another type of static analysis is code linting i.e. analyzing source code for p
 
 ### Testing
 
-{{ includex('docs/examples/default/Makefile', start_match='coverage:', end_match='.PHONY', lang="Makefile") }}
+{{ includex('docs/examples/default/Makefile', start_match='coverage:', end_match='.PHONY', code=True) }}
 
 ### Documentation
 
 ??? quote "Makefile - Documentation Targets"
 
-    {{ includex('docs/examples/default/Makefile', start_match='.PHONY: docs', end_match='.PHONY', start_offset=1, lang="Makefile", indent=4) }}
+    {{ includex('docs/examples/default/Makefile', start_match='.PHONY: docs', end_match='.PHONY', start_offset=1, code=True, indent=4) }}
 
 ---
 
