@@ -2,11 +2,14 @@
 
 {%- import 'template/context' as ctx with context %}
 
-[![documentation][badge_documentation]]({{ctx.remote_url_pages}}) [![badge_pipeline][]]({{ctx.remote_url_https}}/-/pipelines) [![badge_coverage][]]({{ctx.remote_url_pages}}/coverage) [![badge_maintainability][]]()
+[![badge_documentation][]][documentation] [![badge_pipeline][]][pipeline] [![badge_coverage][]][coverage] [![badge_maintainability][]]()
 
-[badge_documentation]: {{ctx.remote_url_pages}}/badges/documentation.svg
-[badge_coverage]: {{ctx.remote_url_https}}/badges/{{default_branch}}/coverage.svg
-[badge_pipeline]: {{ctx.remote_url_https}}/badges/{{default_branch}}/pipeline.svg
+[documentation]: {{ctx.remote_url_pages}}
+[badge_documentation]: https://img.shields.io/badge/Documentation-{{default_branch}}-blue
+[coverage]: {{ctx.remote_url_pages}}/coverage
+[badge_coverage]: {{ctx.remote_url_coverage_badge}}
+[badge_pipeline]: {{ctx.remote_url_pipeline_badge}}
+[pipeline]: {{ctx.remote_url_pipeline}}
 [badge_maintainability]: {{ctx.remote_url_pages}}/badges/maintainability.svg
 
 <!-- TODO: extend readme template -->

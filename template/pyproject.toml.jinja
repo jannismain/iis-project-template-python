@@ -70,24 +70,8 @@ dependencies = ["click"]
 # Similar to `dependencies` above, these must be valid existing
 # projects.
 [project.optional-dependencies]
-dev = ["black", "radon", "ruff"]
+dev = ["black", "radon", "ruff"{% if use_bumpversion %}, "bump2version"{% endif %}]
 test = ["pytest", "pytest-cov", "coverage[toml]"]
-{% if docs!="none" -%}
-doc = [
-{%- if docs=="mkdocs" %}
-  "mkdocs-material",
-  "mkdocstrings[python]",
-  "mkdocs-git-revision-date-localized-plugin",
-  "mkdocs-macros-plugin",
-{%- elif docs=="sphinx" %}
-  "sphinx",
-  "furo",
-  "myst_parser",
-  "sphinx-autodoc2",
-  "sphinx-autobuild",
-{%- endif %}
-]
-{%- endif %}
 
 # The following would provide a command line executable which executes
 # the function `main` from this package's cli module when invoked.

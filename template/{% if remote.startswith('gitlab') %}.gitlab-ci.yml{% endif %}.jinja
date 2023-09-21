@@ -1,8 +1,6 @@
 image: python:latest
-stages: [test, publish]
 
 test:
-  stage: test
   cache: # reuse venv in subsequent jobs
     key: $CI_JOB_NAME
     paths:
@@ -13,18 +11,18 @@ test:
     - source env/bin/activate
   script:
     - pip install .[test]
-    - pytest --doctest-modules --cov --cov-config=pyproject.toml --cov-branch --cov-report term --cov-report html:build/coverage --junitxml=report.xml
-    - coverage report
-    - coverage xml
+    - pytest --doctest-modules --cov --cov-config=pyproject.toml --cov-branch --cov-report term --cov-report html:build/coverage --junitxml=report.xml --cov-report xml
     - pip install anybadge==1.9.0
     - mkdir -p build/badges
     - pip install radon==5.1.0
     - make maintainability
     # generate a badge for the maintainability index with the total average of cyclomatic complexity as value
-    - python -m anybadge --label=Maintainability --value="$(python -m radon cc --total-average -nc src | tail -n 1 | cut -d' ' -f 3) ($(python -m radon cc --total-average -nc src | tail -n 1 | cut -d' ' -f 4 | cut -c 2-4))" -f build/badges/maintainability -o
-    # generate a badge for the documentation with the current version as label
-    # - color: #1082C2 corresponds to the default "informational" color set by https://shields.io
-    - python -m anybadge --label=Documentation --value="v$(python -m {{package_name}} --version)" --color "#1082C2" -f build/badges/documentation -o
+    - |
+      score=$(python -m radon cc --total-average src | tail -n 1 | cut -d' ' -f 3-4)
+      [[ "$score" = A* ]] && color="green";  [[ "$score" = B* ]] && color="green"
+      [[ "$score" = C* ]] && color="yellow"; [[ "$score" = D* ]] && color="orange_2"
+      [[ "$score" = E* ]] && color="orange"; [[ "$score" = F* ]] && color="orangered"
+      python -m anybadge --label=Maintainability --value="$score" --color="$color" -f build/badges/maintainability -o
   coverage: '/TOTAL.+?(\d+\%)/'
   artifacts:
     when: always
@@ -37,23 +35,33 @@ test:
       - build/coverage
       - build/badges
       - env/
-{% if docs != 'none' %}
+
+{% if docs == 'sphinx' -%}
+include: docs/.gitlab/docs.yml
+
+{% elif docs == 'mkdocs' %}
+docs:
+  script:
+    mkdocs build --clean --site-dir build/docs
+  artifacts:
+    paths:
+      - build/docs
+
+{% endif -%}
+
 pages:
-  stage: publish
-  needs:
-    - test
+  needs: [test{% if docs != 'none' %}, docs{% endif %}]
   only:
     - {{default_branch}}
     - staging
   script:
-    - mkdir -p public
-    - source env/bin/activate
-    - pip install .[doc]
-    - DOCS_TARGET=public make docs
-    - mv public/html/* public/. && rm -r public/html
+    {% if docs != 'none' -%}
+    - mv build/docs public
+    {% else -%}
+    - mkdir public
+    {% endif -%}
     - mv build/badges public/.
     - mv build/coverage public/.
   artifacts:
     paths:
       - public
-{% endif -%}

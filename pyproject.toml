@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "init-python-project"
-description = "A python project generator based on copier."
+description = "A python project generator."
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Jannis Mainczyk", email = "jmainczyk@gmail.com" }]
@@ -30,10 +30,6 @@ fallback_version = "0.0.0"
 ]
 "init_python_project.template" = [".*", "**/.*"]
 
-[tool.setuptools.exclude-package-data]
-"*" = ["**/__pycache__"]
-"init_python_project.template" = ["**/__pycache__"]
-
 
 [project.optional-dependencies]
 dev = ["black", "pre-commit", "ruff"]
@@ -54,9 +50,10 @@ init-python-project = "init_python_project.cli:app"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "-ra -q"
+addopts = "-ra -q -n auto --exitfirst"
 testpaths = ["tests"]
 markers = ["slow"]
+filterwarnings = ["ignore::copier.vcs.DirtyLocalWarning"]
 
 [tool.black]
 line-length = 100

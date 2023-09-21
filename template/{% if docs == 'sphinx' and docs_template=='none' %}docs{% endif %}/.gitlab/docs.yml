@@ -1,0 +1,10 @@
+docs:
+  image: python:latest
+  script:
+    - pip install -r docs/requirements.txt
+    - pushd docs && BUILDDIR=_build make html && popd
+    - mkdir -p build/docs
+    - mv docs/_build/html/* build/docs
+  artifacts:
+    paths:
+      - build/docs

@@ -5,7 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.1]
+## [unreleased]
+
+### Added
+
+- github ci now runs tests, collects coverage and creates maintainability and coverage badges
+- add [sphinx_template](https://git01.iis.fhg.de/sch/sphinx_template/) as an option when choosing sphinx for documentation
+
+### Changed
+
+- template now uses a static documentation badge provided by shields.io
+
+### Fixed
+
+- link to pipeline in README now correctly links to github actions
+- when bumpversion is selected, add `bump2version` to dev dependencies
+
+## [0.0.2] - 2023-09-19
+
+### Added
+
+- `init-python-project --version` outputs template version
+
+## [0.0.1] - 2023-09-18
 
 Started this template by forking [pypa/sampleproject] and converting it to a copier template.
 
@@ -45,9 +67,8 @@ An example project (comparable to [pypa/sampleproject]) can be found at [jannism
 
 - trove classifiers (only relevant when publishing to PyPI)
 
-<!-- [unreleased]: https://github.com/jannismain/python-project-template/compare/v0.0.2...HEAD -->
-<!-- [0.0.2]: https://github.com/jannismain/python-project-template/compare/v0.0.1...v0.0.2 -->
-[0.0.1]: https://github.com/jannismain/python-project-template/releases/tag/v0.0.1
-
+[unreleased]: https://github.com/jannismain/python-project-template/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/jannismain/python-project-template/compare/0.0.1...0.0.2
+[0.0.1]: https://github.com/jannismain/python-project-template/releases/tag/0.0.1
 [pypa/sampleproject]: https://github.com/pypa/sampleproject
 [jannismain/python-project-template-example]: https://github.com/jannismain/python-project-template-example

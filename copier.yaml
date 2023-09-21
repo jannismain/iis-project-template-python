@@ -98,6 +98,17 @@ docs:
 
     If you are not sure which one to use, simply go with the default 😉.
 
+docs_template:
+  type: str
+  choices:
+    Fraunhofer IIS Sphinx Template: sphinx-fhg-iis
+    None: none
+  default: "none"
+  when: "{{ docs == 'sphinx' }}"
+  help: Which documentation template do you want to use?
+  explanation: |
+    See [Fraunhofer IIS Sphinx Template](https://git01.iis.fhg.de/sch/sphinx_template/).
+
 remote:
   choices:
     GitHub: github

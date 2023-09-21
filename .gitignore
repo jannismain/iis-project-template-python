@@ -10,3 +10,5 @@ __pycache__
 build
 .obsidian
 docs/examples
+src/init_python_project/template
+src/init_python_project/copier.yaml
