@@ -100,13 +100,15 @@ spellcheck-dump: ## save all flagged words to project terms dictionary
 
 .PHONY: test
 PYTEST_ARGS?=
-test: ## run tests quickly
+test: ## run some tests
+test: build-clean copy-template
 	pytest ${PYTEST_ARGS} -m "not slow"
 test-all: ## run all tests
+test-all: build-clean copy-template
 	pytest ${PYTEST_ARGS}
 
 
-.PHONY: build install-build
+.PHONY: build install-build copy-template build-clean
 PKGNAME=init_python_project
 PKGDIR=src/${PKGNAME}
 BUILDDIR?=build/dist
@@ -123,7 +125,7 @@ copy-template:
 	@cp -r ${TEMPLATE_SRC} ${TEMPLATE_DEST}
 	@cp copier.yaml ${PKGDIR}/.
 build-clean: ## remove build artifacts
-	rm -rf ${BUILDDIR} ${PKGDIR}/template ${PKGDIR}/copier.yaml
+	@rm -rf ${BUILDDIR} ${PKGDIR}/template ${PKGDIR}/copier.yaml
 
 
 .PHONY: help

@@ -11,8 +11,8 @@ def bin():
     yield Path(os.getenv("BIN_PATH", "."))
 
 
+@pytest.mark.slow
 def test_template_generation_via_cli(bin: Path, tmp_path: Path):
-    # generate project
     child = pexpect.spawn(str(bin / "init-python-project"), ["my-project"], cwd=tmp_path, timeout=3)
     child.expect(".* project.*")
     child.sendline("My Project")
@@ -27,7 +27,7 @@ def test_template_generation_via_cli(bin: Path, tmp_path: Path):
     child.expect(".* platform.*")
     child.sendline("")  # accept default
     child.expect(".* name.*")
-    child.sendline("cool-user")  # accept default
+    child.sendline("cool-user")
     child.expect(".* remote.*")
     child.sendline("")  # accept default
     child.expect(".* initial git branch.*")

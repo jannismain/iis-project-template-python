@@ -23,7 +23,7 @@ repos:
     hooks:
       - id: pytest
         name: pytest
-        entry: pytest -n auto -m "not slow"
+        entry: make test
         language: system
         pass_filenames: false
         files: "^template/"
