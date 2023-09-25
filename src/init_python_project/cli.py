@@ -11,7 +11,7 @@ from typer import Argument, Option, Typer, colors, confirm, style
 
 app = Typer()
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 
 def version_callback(value: bool) -> None:

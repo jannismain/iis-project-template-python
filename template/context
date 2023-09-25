@@ -1,10 +1,10 @@
-{# Example: remote_url = git@git01.iis.fhg.de:ks-ip-lib/software/sample_project.git  #}
-{#                          |----------------|---------|-----------------------|     #}
-{#                                domain        group         pages_path             #}
-{#                                           |---------------------------------|     #}
-{#                                                         path                      #}
-{# remote_url_https = https://git01.iis.fhg.de/ks-ip-lib/software/sample_project/    #}
-{# remote_url_pages = https://ks-ip-lib.git01.iis.fhg.de/software/sample_project/    #}
+{# Example: remote_url = git@git01.iis.fhg.de:ks-ip-lib/software/sample_project.git #}
+{# |----------------|---------|-----------------------| #}
+{# domain group pages_path #}
+{# |---------------------------------| #}
+{# path #}
+{# remote_url_https = https://git01.iis.fhg.de/ks-ip-lib/software/sample_project/ #}
+{# remote_url_pages = https://ks-ip-lib.git01.iis.fhg.de/software/sample_project/ #}
 
 {% set domain = (remote_url | replace("git@", "")).split(":")[0] %}
 {% set path = remote_url.split(":")[1].replace(".git", "") %}
@@ -37,8 +37,8 @@
 {% set remote_url_pipeline_badge = remote_url_https + '/actions/workflows/ci.yaml/badge.svg' %}
 {% else %}
 ## coverage and pipeline badges are provided by gitlab
-{% set remote_url_coverage_badge = remote_url_https + '/badges/' + default_branch + 'coverage.svg' %}
-{% set remote_url_pipeline_badge = remote_url_https + '/badges/' + default_branch + 'pipeline.svg' %}
+{% set remote_url_coverage_badge = remote_url_https + '/badges/' + default_branch + '/coverage.svg' %}
+{% set remote_url_pipeline_badge = remote_url_https + '/badges/' + default_branch + '/pipeline.svg' %}
 {% endif %}
 
 {% set cli_command = package_name | replace("_", "-") %}

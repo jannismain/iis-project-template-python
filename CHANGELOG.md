@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [0.0.5] - 2023-09-25
+
+### Fixed
+
+- badge image url for projects hosted on GitLab
+
 ## [0.0.4] - 2023-09-25
 
 ### Changed
@@ -81,7 +87,8 @@ An example project (comparable to [pypa/sampleproject]) can be found at [jannism
 
 - trove classifiers (only relevant when publishing to PyPI)
 
-[unreleased]: https://github.com/jannismain/python-project-template/compare/v0.0.4...HEAD
+[unreleased]: https://github.com/jannismain/python-project-template/compare/v0.0.5...HEAD
+[0.0.5]: https://github.com/jannismain/python-project-template/compare/0.0.4...0.0.5
 [0.0.4]: https://github.com/jannismain/python-project-template/compare/0.0.3...0.0.4
 [0.0.3]: https://github.com/jannismain/python-project-template/compare/0.0.2...0.0.3
 [0.0.2]: https://github.com/jannismain/python-project-template/compare/0.0.1...0.0.2
