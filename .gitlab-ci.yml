@@ -4,6 +4,7 @@ default:
 
 variables:
   GIT_DEPTH: 0
+  GIT_SUBMODULE_STRATEGY: recursive
 
 # build_example:
 #   stage: build
@@ -41,9 +42,11 @@ dist:
 
 docs:
   stage: build
+  needs:
+    - dist
   script:
     - apt-get update && apt-get install tree
-    - pip install .[doc]
+    - pip install `ls build/dist/*.whl`[doc]
     - make docs
   artifacts:
     paths:

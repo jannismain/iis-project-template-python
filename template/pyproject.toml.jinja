@@ -70,7 +70,7 @@ dependencies = ["click"]
 # Similar to `dependencies` above, these must be valid existing
 # projects.
 [project.optional-dependencies]
-dev = ["black", "radon", "ruff"{% if use_bumpversion %}, "bump2version"{% endif %}]
+dev = ["black", "radon", "ruff"{% if bumpversion %}, "bump2version"{% endif %}]
 test = ["pytest", "pytest-cov", "coverage[toml]"]
 
 # The following would provide a command line executable which executes

@@ -39,7 +39,7 @@ def venv(tmp_path):
 
 
 @pytest.mark.slow
-@pytest.mark.parametrize("use_precommit", [True, False], ids=["pre-commit", "no pre-commit"])
+@pytest.mark.parametrize("precommit", [True, False], ids=["pre-commit", "no pre-commit"])
 @pytest.mark.parametrize(
     "docs,docs_template",
     SUPPORTED_DOCS_TEMPLATES_COMBINATIONS,
@@ -48,7 +48,7 @@ def venv(tmp_path):
 def test_template_generation(
     venv: VirtualEnvironment,
     tmp_path: Path,
-    use_precommit: bool,
+    precommit: bool,
     docs: str,
     docs_template: str,
     remote: str,
@@ -59,7 +59,7 @@ def test_template_generation(
         str(tmp_path),
         data=dict(
             **required_static_data,
-            use_precommit=use_precommit,
+            precommit=precommit,
             docs=docs,
             docs_template=docs_template,
             remote=remote,
@@ -81,7 +81,7 @@ def test_template_generation(
     assert fp_changelog.is_file(), "new projects should have a CHANGELOG file"
 
     fp_precommit_config = tmp_path / ".pre-commit-config.yaml"
-    assert fp_precommit_config.is_file() == use_precommit
+    assert fp_precommit_config.is_file() == precommit
 
     fp_git = tmp_path / ".git"
     assert fp_git.is_dir(), "new projects should be git repositories"
@@ -318,21 +318,21 @@ def read_last_commit_msg(cwd: Path | str = None):
     return check_output(["git", "log", "-1", "--pretty=%B"], cwd=str(cwd or ".")).decode().strip()
 
 
-@pytest.mark.parametrize("use_bumpversion", [True, False], ids=["bumpversion", "no bumpversion"])
-def test_bumpversion_option(venv: VirtualEnvironment, tmp_path: Path, use_bumpversion: bool):
+@pytest.mark.parametrize("bumpversion", [True, False], ids=["bumpversion", "no-bumpversion"])
+def test_bumpversion_option(venv: VirtualEnvironment, tmp_path: Path, bumpversion: bool):
     run_copy(
         str(fp_template),
         str(tmp_path),
         data=dict(
             **required_static_data,
-            use_bumpversion=use_bumpversion,
-            use_precommit=False,  # makes testing easier
+            bumpversion=bumpversion,
+            precommit=False,  # makes testing easier
         ),
         unsafe=True,
         defaults=True,
         vcs_ref="HEAD",
     )
-    if not use_bumpversion:
+    if not bumpversion:
         assert not (tmp_path / ".bumpversion.cfg").is_file()
         return
 

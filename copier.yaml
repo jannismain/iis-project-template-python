@@ -51,7 +51,7 @@ package_name:
 
     Finally, the package name is repeated across multiple configuration and documentation files.
 
-use_precommit:
+precommit:
   type: bool
   default: true
   help: Use pre-commit to run checks on each commit?
@@ -64,7 +64,7 @@ use_precommit:
     Most formatters and some linters are able to fix issues automatically.
     So you can simply review the changes those tools made, stage them and commit again.
 
-use_bumpversion:
+bumpversion:
   type: bool
   default: false
   help: Use bumpversion to manage semantic version across multiple files?
@@ -178,4 +178,4 @@ _tasks:
   - "rm -rf context"
   - "git init --initial-branch={{default_branch}}"
   - "git remote add origin {{remote_url}} || true"
-  - "{% if use_precommit %}pre-commit install || echo 'Error during installation of pre-commit hooks. Is pre-commit installed?'{% endif %}"
+  - "{% if precommit %}pre-commit install || echo 'Error during installation of pre-commit hooks. Is pre-commit installed?'{% endif %}"

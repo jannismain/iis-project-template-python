@@ -30,6 +30,7 @@ pypa
 pyproject
 pytest
 sampleproject
+secho
 sendline
 setuptools
 SPHINXBUILD

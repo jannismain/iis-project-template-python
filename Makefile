@@ -10,32 +10,30 @@ DOC_EXAMPLES = docs/examples/mkdocs docs/examples/sphinx docs/examples/default d
 examples: ## build all published examples
 examples: $(PUBLISHED_EXAMPLES)
 
-COPIER_ARGS?=--trust --vcs-ref=HEAD
-COPIER_DEFAULT_VALUES=-d "project_name=Sample Project" -d "package_name=sample_project"
-build/examples/%: COPIER_DEFAULT_VALUES += --defaults
+INIT_PYTHON_PROJECT_ARGS=--project-name="Sample Project"
 build/examples/%: EXAMPLE_DIR:=$@
-build/examples/github: COPIER_DEFAULT_VALUES+=-d user_name=jannismain -d remote=github -d remote_url=git@github.com:jannismain/python-project-template-example.git
-build/examples/gitlab%: COPIER_DEFAULT_VALUES+=-d user_name=mkj
-build/examples/gitlab_fhg: COPIER_DEFAULT_VALUES+= -d remote=gitlab-fhg -d remote_url=git@gitlab.cc-asp.fraunhofer.de:mkj/sample-project.git
-build/examples/gitlab_iis: COPIER_DEFAULT_VALUES+= -d remote=gitlab-iis -d remote_url=git@git01.iis.fhg.de:mkj/sample-project.git
-build/examples/gitlab_iis_sphinx: COPIER_DEFAULT_VALUES+= -d remote=gitlab-iis -d remote_url=git@git01.iis.fhg.de:mkj/sample-project-sphinx.git -d docs=sphinx
+build/examples/github: INIT_PYTHON_PROJECT_ARGS+=--user-name=jannismain --remote=github --remote-url=git@github.com:jannismain/python-project-template-example.git
+build/examples/gitlab%: INIT_PYTHON_PROJECT_ARGS+=--user-name mkj
+build/examples/gitlab_fhg: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-fhg --remote-url=git@gitlab.cc-asp.fraunhofer.de:mkj/sample-project.git
+build/examples/gitlab_iis: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project.git
+build/examples/gitlab_iis_sphinx: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project-sphinx.git --docs=sphinx
 
-$(PUBLISHED_EXAMPLES):
+$(PUBLISHED_EXAMPLES): uncopy-template copy-template
 	@echo "Recreating '$@'..."
 	@rm -rf "$@" && mkdir -p "$@"
-	@copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} . "$@"
+	init-python-project "$@" ${INIT_PYTHON_PROJECT_ARGS} --defaults --yes --verbose
 	$(MAKE) example-setup EXAMPLE_DIR="$@"
 
-docs/examples/mkdocs: COPIER_DEFAULT_VALUES+=-d docs=mkdocs
-docs/examples/sphinx: COPIER_DEFAULT_VALUES+=-d docs=sphinx
-docs/examples/minimal: COPIER_DEFAULT_VALUES+=-d docs=none -d use_precommit=False -d use_bumpversion=False
-docs/examples/full: COPIER_DEFAULT_VALUES+=-d docs=mkdocs -d use_precommit=True -d use_bumpversion=True
-docs/examples/gitlab: COPIER_DEFAULT_VALUES+=-d remote=gitlab-iis
-
-$(DOC_EXAMPLES):
+docs/examples/mkdocs: INIT_PYTHON_PROJECT_ARGS+=--docs mkdocs
+docs/examples/sphinx: INIT_PYTHON_PROJECT_ARGS+=--docs sphinx
+docs/examples/minimal: INIT_PYTHON_PROJECT_ARGS+=--docs none --no-precommit --no-bumpversion
+docs/examples/full: INIT_PYTHON_PROJECT_ARGS+=--docs mkdocs --precommit --bumpversion
+docs/examples/gitlab: INIT_PYTHON_PROJECT_ARGS+=--docs mkdocs --precommit --bumpversion --remote gitlab-iis
+doc-examples: $(DOC_EXAMPLES)
+$(DOC_EXAMPLES): uncopy-template copy-template
 	@echo "Recreating '$@'..."
 	@rm -rf "$@" && mkdir -p "$@"
-	@copier copy ${COPIER_ARGS} --defaults -d user_name=mkj ${COPIER_DEFAULT_VALUES} . "$@"
+	init-python-project "$@" --user-name mkj ${INIT_PYTHON_PROJECT_ARGS} --defaults --yes --verbose
 	@cd $@ &&\
 		python -m venv .venv || echo "Couldn't setup virtual environment" &&\
 		. .venv/bin/activate &&\
@@ -66,7 +64,7 @@ examples-clean: ## remove all published examples
 
 build/example:  ## build individual example for manual testing (will prompt for values!)
 	rm -rf "$@"
-	copier copy ${COPIER_ARGS} ${COPIER_DEFAULT_VALUES} . "$@"
+	init-python-project "$@" ${INIT_PYTHON_PROJECT_ARGS}
 	$(MAKE) example-setup EXAMPLE_DIR="$@"
 
 
@@ -124,8 +122,10 @@ install-build: build
 copy-template:
 	@cp -r ${TEMPLATE_SRC} ${TEMPLATE_DEST}
 	@cp copier.yaml ${PKGDIR}/.
-build-clean: ## remove build artifacts
-	@rm -rf ${BUILDDIR} ${PKGDIR}/template ${PKGDIR}/copier.yaml
+uncopy-template:
+	@rm -rf ${TEMPLATE_DEST} ${PKGDIR}/copier.yaml
+build-clean: uncopy-template ## remove build artifacts
+	@rm -rf ${BUILDDIR}
 
 
 .PHONY: help

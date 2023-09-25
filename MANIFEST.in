@@ -1,3 +1,4 @@
 prune template
 prune */__pycache__
 exclude copier.yaml
+graft src/init_python_project/template
