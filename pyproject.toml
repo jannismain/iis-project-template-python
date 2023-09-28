@@ -11,6 +11,7 @@ authors = [{ name = "Jannis Mainczyk", email = "jmainczyk@gmail.com" }]
 maintainers = [{ name = "Jannis Mainczyk", email = "jmainczyk@gmail.com" }]
 dependencies = ["copier", "typer[all]"]
 dynamic = ["version"]
+license = { file = "LICENSE", type = "MIT" }
 
 [tool.setuptools_scm]
 fallback_version = "0.0.0"

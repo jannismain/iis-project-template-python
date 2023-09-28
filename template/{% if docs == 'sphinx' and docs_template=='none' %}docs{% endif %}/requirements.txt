@@ -1,5 +1,5 @@
 sphinx
 furo
 myst_parser
-sphinx-autodoc2
+sphinx-autoapi
 sphinx-autobuild

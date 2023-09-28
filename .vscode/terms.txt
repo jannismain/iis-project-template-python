@@ -1,3 +1,6 @@
+asprunner
+autoapi
+autodoc
 automodule
 BUILDDIR
 bumpversion
@@ -6,16 +9,20 @@ cyclomatic
 docstrings
 Docutils
 endfor
+fraunhofer
 Furo
 gitfile
 gitlab
+gitlabci
 gitmoji
 glab
 includex
+Jannis
 jannismain
 jimustafa
 jinja
 magiclink
+Mainczyk
 mkdocs
 mkdocstrings
 myst

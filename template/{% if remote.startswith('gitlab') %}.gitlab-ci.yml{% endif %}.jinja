@@ -1,4 +1,6 @@
-image: python:latest
+default:
+  image: python:latest{% if remote=='gitlab-fhg' %}
+  tags: [asprunner]{% endif %}
 
 test:
   cache: # reuse venv in subsequent jobs
@@ -35,14 +37,16 @@ test:
       - build/coverage
       - build/badges
       - env/
+    expire_in: 1w  # most recent artifact is always kept
 
 {% if docs == 'sphinx' -%}
 include: docs/.gitlab/docs.yml
 
-{% elif docs == 'mkdocs' %}
+{% elif docs == 'mkdocs' -%}
 docs:
   script:
-    mkdocs build --clean --site-dir build/docs
+    - pip install -r docs/requirements.txt
+    - mkdocs build --clean --site-dir build/docs
   artifacts:
     paths:
       - build/docs
@@ -65,3 +69,4 @@ pages:
   artifacts:
     paths:
       - public
+    expire_in: 1w

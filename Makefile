@@ -18,7 +18,7 @@ build/examples/gitlab_fhg: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-fhg --remot
 build/examples/gitlab_iis: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project.git
 build/examples/gitlab_iis_sphinx: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project-sphinx.git --docs=sphinx
 
-$(PUBLISHED_EXAMPLES): uncopy-template copy-template
+$(PUBLISHED_EXAMPLES): uncopy-template link-template
 	@echo "Recreating '$@'..."
 	@rm -rf "$@" && mkdir -p "$@"
 	init-python-project "$@" ${INIT_PYTHON_PROJECT_ARGS} --defaults --yes --verbose
@@ -124,6 +124,10 @@ copy-template:
 	@cp copier.yaml ${PKGDIR}/.
 uncopy-template:
 	@rm -rf ${TEMPLATE_DEST} ${PKGDIR}/copier.yaml
+link-template:
+	@cd ${PKGDIR} &&\
+		ln -s ../../${TEMPLATE_SRC} template &&\
+		ln -s ../../copier.yaml copier.yaml
 build-clean: uncopy-template ## remove build artifacts
 	@rm -rf ${BUILDDIR}
 

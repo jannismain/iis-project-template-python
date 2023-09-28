@@ -8,4 +8,11 @@ repos:
       - id: end-of-file-fixer
         exclude: .*\.dat
       - id: check-yaml
-      - id: check-added-large-files
+      - id: check-added-large-files{% if remote.startswith('gitlab') and docs != 'sphinx' %}
+  - repo: https://github.com/bjd2385/pre-commit-gitlabci-lint
+    rev: v1.3.0
+    hooks:
+      - id: gitlabci-lint
+        args: ["-p", "46207681"]  # project id is required, but any will do
+        entry: env GITLAB_TOKEN=w8i5Q1CaEpF57cqxezvG gitlabci-lint
+        files: "^\\.gitlab-ci\\.yml$"{% endif %}

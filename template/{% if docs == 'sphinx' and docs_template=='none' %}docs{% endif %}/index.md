@@ -11,5 +11,4 @@ hide-toc: true
 :hidden:
 
 changelog
-apidocs/index
 ```

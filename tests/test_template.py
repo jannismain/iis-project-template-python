@@ -28,6 +28,11 @@ required_static_data = dict(
 )
 
 
+def get_precommit_hooks(pre_commit_config_path: Path) -> list[str]:
+    pre_commit_config = yaml.safe_load(pre_commit_config_path.open())
+    return [hook["id"] for repo in pre_commit_config["repos"] for hook in repo["hooks"]]
+
+
 @pytest.fixture
 def venv(tmp_path):
     """Create virtual environment in subdirectory of tmp_path."""
@@ -82,6 +87,14 @@ def test_template_generation(
 
     fp_precommit_config = tmp_path / ".pre-commit-config.yaml"
     assert fp_precommit_config.is_file() == precommit
+
+    if precommit:
+        # gitlabci-lint incompatible with sphinx, as ci job is imported from docs/.gitlab/docs.yml
+        # so it is currently only included for projects using mkdocs with gitlab
+        if remote.startswith("gitlab") and docs != "sphinx":
+            assert "gitlabci-lint" in get_precommit_hooks(fp_precommit_config)
+        else:
+            assert "gitlabci-lint" not in get_precommit_hooks(fp_precommit_config)
 
     fp_git = tmp_path / ".git"
     assert fp_git.is_dir(), "new projects should be git repositories"
@@ -170,12 +183,14 @@ def test_remote_option(tmp_path: Path, remote: str):
 
     readme_template_url = (tmp_path / "README.md").open().readlines()[-1].strip()
 
-    if remote == "gitlab":
+    if remote == "github":
         assert remote_url == f"git@github.com:{user_name}/wonderful-project.git"
         assert (tmp_path / ".github").is_dir()
         assert "github.com" in readme_template_url
     if remote.startswith("gitlab"):
-        assert (tmp_path / ".gitlab-ci.yml").is_file()
+        gitlab_ci_yml = tmp_path / ".gitlab-ci.yml"
+        assert gitlab_ci_yml.is_file()
+        check_call(["pre-commit", "run", "--all-files", "gitlabci-lint"], cwd=str(tmp_path))
     if remote.endswith("iis"):
         assert remote_url == f"git@git01.iis.fhg.de:{user_name}/wonderful-project.git"
         assert "git01.iis.fhg.de" in readme_template_url
@@ -206,8 +221,6 @@ def test_docs_option(venv: VirtualEnvironment, tmp_path: Path, docs: str):
     elif docs == "sphinx":
         fp_sphinx_makefile = root / "docs" / "Makefile"
         assert fp_sphinx_makefile.is_file(), "sphinx Makefile should exist"
-        fp_sphinx_requirements = root / "docs" / "requirements.txt"
-        assert fp_sphinx_requirements.is_file(), "sphinx requirements file should exist"
         fp_sphinx_ci_job = root / "docs" / ".gitlab" / "docs.yml"
         assert fp_sphinx_ci_job.is_file(), "sphinx ci job should exist"
 

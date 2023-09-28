@@ -38,25 +38,15 @@ myst_enable_extensions = [
     "colon_fence",  # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html#markdown-figures
 ]
 
-# -- Options for sphinx-autodoc2 ---------------------------------------------
-# https://sphinx-autodoc2.readthedocs.io/en/latest/config.html
+# -- Options for sphinx-autoapi ----------------------------------------------
+# https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html
 
-extensions += ["autodoc2"]  # https://sphinx-autodoc2.readthedocs.io/
-
-autodoc2_output_dir = "apidocs"
-autodoc2_packages = [
-    "../src/{{package_name}}",
+extensions += [
+    "sphinx.ext.napoleon",  # required to parse google-style docstrings
+    "sphinx.ext.autodoc",  # required to parse typehints
+    "autoapi.extension",
 ]
-autodoc2_render_plugin = "md"
-{% raw %}
-autodoc2_index_template = """
-API Documentation
-=================
+autoapi_dirs = ["../src/{{package_name}}"]
 
-.. toctree::
-   :titlesonly:
-{% for package in top_level %}
-   {{ package }}
-{%- endfor %}
-"""
-{% endraw -%}
+# https://sphinx-autoapi.readthedocs.io/en/latest/how_to.html#how-to-include-type-annotations-as-types-in-rendered-docstrings
+autodoc_typehints = "description"
