@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Added
+
+- author/maintainer name and email are read from global git configuration.
+
 ### Fixed
 
 - fix warning when building sphinx documentation -> maintainability badge now links to pipeline

@@ -12,3 +12,4 @@ build
 docs/examples
 src/init_python_project/template
 src/init_python_project/copier.yaml
+src/init_python_project/extensions
