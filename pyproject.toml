@@ -44,7 +44,6 @@ fallback_version = "0.0.0"
     "**/*.yml",
     "**/*.toml",
     "*.cfg",
-    "context",
     ".*",
     "**/.*",
 ]

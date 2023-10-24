@@ -121,13 +121,14 @@ remote:
 
     Also, the link to your documentation depends on which remote you choose.
 
-    If you want to push your project to multiple remotes, you can add them later.
+    If you want to push your project to multiple remotes, you can still add them later.
+    In this case, simply choose one.
 
 user_name:
   type: str
-  help: User name (the one you used with your hosted git provider)
+  help: User name (the one you used with your hosted git platform)
   explanation: |
-    This is the user name you are using with the remote provider you provided in the previous question.
+    This is the user name you are using with the remote platform you provided in the previous question.
 
     Together with [remote][], it will be used to suggest a [remote url][remote-url] for your project.
 
@@ -176,7 +177,6 @@ default_branch:
     [initial branch]: https://git-scm.com/docs/git-init#Documentation/git-init.txt---initial-branchltbranch-namegt
 
 _tasks:
-  - "rm -rf context"
   - "git init --initial-branch={{default_branch}}"
   - "git remote add origin {{remote_url}} || true"
   - "{% if precommit %}pre-commit install || echo 'Error during installation of pre-commit hooks. Is pre-commit installed?'{% endif %}"
