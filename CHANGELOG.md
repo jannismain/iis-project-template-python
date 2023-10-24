@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [0.0.6] - 2023-10-12
+
 ### Added
 
 - automatically assign `asprunner` tag in GitLab CI configuration intended for `gitlab-fhg` remote.
@@ -103,7 +105,8 @@ An example project (comparable to [pypa/sampleproject]) can be found at [jannism
 
 - trove classifiers (only relevant when publishing to PyPI)
 
-[unreleased]: https://github.com/jannismain/python-project-template/compare/v0.0.5...HEAD
+[unreleased]: https://github.com/jannismain/python-project-template/compare/v0.0.6...HEAD
+[0.0.6]: https://github.com/jannismain/python-project-template/compare/0.0.5...0.0.6
 [0.0.5]: https://github.com/jannismain/python-project-template/compare/0.0.4...0.0.5
 [0.0.4]: https://github.com/jannismain/python-project-template/compare/0.0.3...0.0.4
 [0.0.3]: https://github.com/jannismain/python-project-template/compare/0.0.2...0.0.3
