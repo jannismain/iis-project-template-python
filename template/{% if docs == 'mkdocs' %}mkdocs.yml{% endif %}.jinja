@@ -1,10 +1,8 @@
 site_name: {{ project_name }}
 
-{%- import 'template/context' as ctx with context %}
-
-repo_url: {{ ctx.remote_url_https }}
-repo_name: {{ ctx.remote_url_https.split('/')[-1] }}
-site_url: {{ ctx.remote_url_pages }}
+repo_url: {{ remote_url_https }}
+repo_name: {{ remote_url_https.split('/')[-1] }}
+site_url: {{ remote_url_pages }}
 edit_uri: -/edit/{{default_branch}}/docs/
 
 theme:
