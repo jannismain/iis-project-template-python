@@ -120,13 +120,15 @@ install-build: build
 	@pip uninstall -y ${PKGNAME}
 	pip install --force-reinstall ${BUILDDIR}/*.whl
 copy-template:
-	@cp -r ${TEMPLATE_SRC} ${TEMPLATE_DEST}
 	@cp copier.yaml ${PKGDIR}/.
+	@cp -r ${TEMPLATE_SRC} ${TEMPLATE_DEST}
+	@cp -r ./extensions ${PKGDIR}/extensions
 uncopy-template:
-	@rm -rf ${TEMPLATE_DEST} ${PKGDIR}/copier.yaml
+	@rm -rf ${TEMPLATE_DEST} ${PKGDIR}/copier.yaml ${PKGDIR}/extensions
 link-template:
-	@cd ${PKGDIR} &&\
+	-@cd ${PKGDIR} &&\
 		ln -s ../../${TEMPLATE_SRC} template &&\
+		ln -s ../../extensions extensions &&\
 		ln -s ../../copier.yaml copier.yaml
 build-clean: uncopy-template ## remove build artifacts
 	@rm -rf ${BUILDDIR}
