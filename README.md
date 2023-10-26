@@ -74,6 +74,46 @@ The second part of the user guide explains how best practices, like [testing][],
 [documentation]: https://mkj.git01.iis.fhg.de/project-template/user-guide/topics/documentation
 [continuous integration]: https://mkj.git01.iis.fhg.de/project-template/user-guide/topics/ci
 
+## Contributing
+
+Every kind contribution is appreciated. Here is a list of ways to contribute (from easy to more involved):
+
+- [report a bug][new issue]
+- [open issues with feature requests (or other feedback)][new issue]
+- [improve documentation][docs]
+- [review open merge requests][mr]
+- contribute a bugfix or feature
+
+### Working on Issues
+
+Have a bugfix or feature you want to contribute? That's exciting!
+
+If you are unsure about how to contribute changes, here is how I tend to do things:
+
+```mermaid
+flowchart LR
+    assign[assign issue to yourself] --> mr[create branch & draft mr] --> implement[implement bugfix / feature] --> review[assign maintainer as reviewer]
+```
+*Note: Feel free to do what works for you (e.g. fork & merge request to upstream)*
+
+If you are unsure about how to go about implementation, we can discuss the issue.
+
+[new issue]: https://git01.iis.fhg.de/mkj/project-template/-/issues/new
+[mr]: https://git01.iis.fhg.de/mkj/project-template/-/merge_requests
+
+### Reviewing Changes
+
+When you are reviewing a merge request, please leave a comment at the end of your review session indicating the scope of your review.
+
+<details>
+<summary>Example: Comment at the end of a review</summary>
+I can confirm this works on Windows! I tested project creation and successfully created a project with default values. I did not look at the individual changes in this MR.
+</details>
+
+If you did a full review (i.e. review changes, verify on your machine, ...), you can additionally `Approve` the MR when you are done.
+
+If you want to learn more about the review process, have a look at [Google Engineering Practices Documentation](https://google.github.io/eng-practices/) which includes the [Code Reviewer's Guide](https://google.github.io/eng-practices/review/reviewer/) and the [Change Author's Guide](https://google.github.io/eng-practices/review/developer/).
+
 ## Known Issues
 
-* Do not name your project `test`. It will mess with [`pytest`'s automatic test discovery mechanism](https://docs.pytest.org/explanation/goodpractices.html#conventions-for-python-test-discovery).
+* Do not start your project name with `test`. It will mess with [`pytest`'s automatic test discovery mechanism](https://docs.pytest.org/explanation/goodpractices.html#conventions-for-python-test-discovery). If you want your project to be named test, you have to configure pytest accordingly.
