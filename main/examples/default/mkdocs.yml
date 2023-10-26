@@ -1,0 +1,30 @@
+site_name: Sample Project
+
+repo_url: https://github.com/mkj/sample-project
+repo_name: sample-project
+site_url: https://mkj.github.io/sample-project
+edit_uri: -/edit/main/docs/
+
+theme:
+  name: material
+
+plugins:
+  - search
+  - git-revision-date-localized: # https://timvink.github.io/mkdocs-git-revision-date-localized-plugin
+      type: timeago
+      fallback_to_build_date: true
+  - mkdocstrings: # see https://mkdocstrings.github.io/
+      default_handler: python
+      enable_inventory: true
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_root_heading: true
+            show_category_heading: false
+            show_submodules: true
+          import:
+            - https://numpy.org/doc/stable/objects.inv
+  - macros: # see https://mkdocs-macros-plugin.readthedocs.io/
+      include_dir: .
+      module_name: docs/macros

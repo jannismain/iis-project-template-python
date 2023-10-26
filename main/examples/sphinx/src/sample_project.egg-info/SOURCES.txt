@@ -1,0 +1,15 @@
+README.md
+pyproject.toml
+src/sample_project/__init__.py
+src/sample_project/__main__.py
+src/sample_project/cli.py
+src/sample_project/package_data.dat
+src/sample_project/simple.py
+src/sample_project.egg-info/PKG-INFO
+src/sample_project.egg-info/SOURCES.txt
+src/sample_project.egg-info/dependency_links.txt
+src/sample_project.egg-info/entry_points.txt
+src/sample_project.egg-info/requires.txt
+src/sample_project.egg-info/top_level.txt
+tests/test_cli.py
+tests/test_simple.py

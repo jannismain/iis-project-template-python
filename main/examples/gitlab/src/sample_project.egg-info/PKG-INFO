@@ -1,0 +1,51 @@
+Metadata-Version: 2.1
+Name: sample-project
+Version: 0.0.1
+Author-email: mkj <mkj@iis.fhg.de>
+Maintainer-email: mkj <mkj@iis.fhg.de>
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: click
+Provides-Extra: dev
+Requires-Dist: black; extra == "dev"
+Requires-Dist: radon; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Requires-Dist: bump2version; extra == "dev"
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+Requires-Dist: pytest-cov; extra == "test"
+Requires-Dist: coverage[toml]; extra == "test"
+
+# Sample Project
+
+[![badge_documentation][]][documentation] [![badge_pipeline][]][pipeline] [![badge_coverage][]][coverage] [![badge_maintainability][]]()
+
+[documentation]: https://mkj.git01.iis.fhg.de/sample-project
+[badge_documentation]: https://img.shields.io/badge/Documentation-main-blue
+[coverage]: https://mkj.git01.iis.fhg.de/sample-project/coverage
+[badge_coverage]: https://git01.iis.fhg.de/mkj/sample-project/badges/main/coverage.svg
+[badge_pipeline]: https://git01.iis.fhg.de/mkj/sample-project/badges/main/pipeline.svg
+[pipeline]: https://git01.iis.fhg.de/mkj/sample-project/-/pipelines
+[badge_maintainability]: https://mkj.git01.iis.fhg.de/sample-project/badges/maintainability.svg
+
+<!-- TODO: extend readme template -->
+
+## Installation
+
+```console
+pip install git+https://git01.iis.fhg.de/mkj/sample-project
+```
+
+## Usage
+
+Call the `sample-project` command line interface like this:
+
+```console
+$ sample-project
+Hello, Sample Project!
+```
+
+Provide the `--help` option to see supported options and arguments.
+
+---
+*This project was created using the [Project Template for Python](https://git01.iis.fhg.de/mkj/project-template)*

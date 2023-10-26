@@ -1,0 +1,32 @@
+<table>
+<thead><tr><th>Question</th><th>Answers</th></tr></thead>
+{% for var, q in questions.items() -%}
+<tr>
+{%- set choices_values = q.get('choices', dict()).values() | list -%}
+{%- set choices = q.get('choices', dict()).keys() | list -%}
+{% if choices %}
+    {%- set default_value = choices[choices_values.index(q.get('default'))] -%}
+{% elif q.type == 'bool' and 'default' in q %}
+    {%- set choices = ['Yes', 'No'] -%}
+    {%- set choices_values = [True, False] -%}
+    {%- set default_value = ['No', 'Yes'][q.default] -%}
+{% else %}
+    {%- set default_value = q.get('default') -%}
+{% endif %}
+<td>
+    {{q.help | default(var)}}
+</td>
+<td>
+    {% if choices %}
+        <ul>
+        {% for choice in choices %}
+        <li>{{choice}}{% if choice == default_value %} (default){% endif %}</li>
+        {% endfor %}
+        </ul>
+    {% elif 'expected' in q %}
+        <em>{{q.expected}}{% if 'examples' in q %}<br>Examples: <code>{{"</code>, <code>".join(q.examples)}}</code>{% endif %}</em>
+    {% endif %}
+</td>
+</tr>
+{% endfor %}
+</table>

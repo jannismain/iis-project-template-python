@@ -1,0 +1,2 @@
+[console_scripts]
+sample-project = sample_project.cli:main

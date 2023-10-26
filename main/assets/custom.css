@@ -1,0 +1,22 @@
+/* center mermaid graphs */
+.mermaid {
+  text-align: center;
+}
+
+/* convert emphasized text under images to caption */
+img + em {
+  display: block;
+}
+
+.md-typeset .caption,
+.md-typeset figcaption {
+  /* same as material's figcaption */
+  font-style: italic;
+  max-width: 24rem;
+  margin: 1em auto 1.5em;
+  text-align: center;
+  display: block;
+  font-size: 0.8rem;
+  /* custom */
+  line-height: 1.2;
+}

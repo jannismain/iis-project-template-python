@@ -1,0 +1,128 @@
+[project]
+# This is the name of your project. The first time you publish this
+# package, this name will be registered for you. It will determine how
+# users can install this project, e.g.:
+#
+# $ pip install sampleproject
+#
+# And where it will live on PyPI: https://pypi.org/project/sampleproject/
+#
+# There are some restrictions on what makes a valid project name
+# specification here:
+# https://packaging.python.org/specifications/core-metadata/#name
+name = "sample-project" # required
+
+# Versions should comply with PEP 440:
+# https://www.python.org/dev/peps/pep-0440/
+#
+# For a discussion on single-sourcing the version, see
+# https://packaging.python.org/guides/single-sourcing-package-version/
+version = "0.0.1" # required
+
+# This is a one-line description or tagline of what your project does. This
+# corresponds to the "Summary" metadata field:
+# https://packaging.python.org/specifications/core-metadata/#summary
+description = "" # optional
+
+# This is an optional longer description of your project that represents
+# the body of text which users will see when they visit PyPI.
+#
+# Often, this is the same as your README, so you can just read it in from
+# that file directly (as we have already done above)
+#
+# This field corresponds to the "Description" metadata field:
+# https://packaging.python.org/specifications/core-metadata/#description-optional
+readme = "README.md" # optional
+
+# Specify which Python versions you support. In contrast to the
+# 'Programming Language' classifiers above, 'pip install' will check this
+# and refuse to install the project if the version does not match. See
+# https://packaging.python.org/guides/distributing-packages-using-setuptools/#python-requires
+requires-python = ">=3.7"
+
+# Name or names of the individual or organization which originally authored
+# the project, and a valid email address corresponding to the name listed.
+authors = [
+  { name = "mkj", email = "mkj@iis.fhg.de" },
+]
+
+# Name or names of the individual or organization which currently maintains
+# the project, and a valid email address corresponding to the name listed.
+maintainers = [
+  { name = "mkj", email = "mkj@iis.fhg.de" },
+]
+
+# This field lists other packages that your project depends on to run.
+# Any package you put here will be installed by pip when your project is
+# installed, so they must be valid existing projects.
+#
+# For an analysis of this field vs pip's requirements files see:
+# https://packaging.python.org/discussions/install-requires-vs-requirements/
+dependencies = ["click"]
+
+# List additional groups of dependencies here (e.g. development
+# dependencies). Users will be able to install these using the "extras"
+# syntax, for example:
+#
+#   $ pip install sample_project[dev]
+#
+# Similar to `dependencies` above, these must be valid existing
+# projects.
+[project.optional-dependencies]
+dev = ["black", "radon", "ruff", "bump2version"]
+test = ["pytest", "pytest-cov", "coverage[toml]"]
+
+# The following would provide a command line executable which executes
+# the function `main` from this package's cli module when invoked.
+[project.scripts] # optional
+sample-project = "sample_project.cli:main"
+
+# This is configuration specific to the `setuptools` build backend.
+# If you are using a different build backend, you will need to change this.
+[tool.setuptools]
+# If there are data files included in your packages that need to be
+# installed, specify them here.
+package-data = { "sample_project" = ["*.dat"] }
+
+[build-system]
+# These are the assumed default build requirements from pip:
+# https://pip.pypa.io/en/stable/reference/pip/#pep-517-and-518-support
+requires = ["setuptools>=43.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.coverage.run]
+command_line = "-m pytest --cov --cov-config=pyproject.toml --cov-branch --cov-report term-missing --cov-report html:build/coverage"
+source = ["src", "tests"]
+
+[tool.coverage.report]
+omit = ["**/setup.py", "**/__init__.py", "**/__main__.py"]
+exclude_lines = ["if __name__ == .__main__."]
+
+[tool.coverage.html]
+directory = "build/coverage"
+
+[tool.ruff]
+extend-select = ["I", "D", "UP", "PIE790", "C90", "N", "B"]
+# unnecessary-pass (PIE790)
+# I     isort
+# D     pydocstyle
+# UP    pyupgrade
+# C90   mccabe complexity
+# N     pep8-naming
+# B     flake8-bugbear
+src = ["src", "tests"]
+ignore = ["E501", "D1"]
+# E501: line length violations
+# D1XX: missing docstring
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.ruff.mccabe]
+# Flag errors (`C901`) whenever the complexity level exceeds 5.
+max-complexity = 5
+# Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402"]
+"docs/source/conf.py" = ["E402"]

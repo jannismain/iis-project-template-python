@@ -1,0 +1,11 @@
+click
+
+[dev]
+black
+radon
+ruff
+
+[test]
+pytest
+pytest-cov
+coverage[toml]
