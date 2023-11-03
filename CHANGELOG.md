@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Fixed
+
+- fix warning when building sphinx documentation -> maintainability badge now links to pipeline
+
 ## [0.0.6] - 2023-10-12
 
 ### Added
