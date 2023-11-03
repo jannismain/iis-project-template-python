@@ -26,7 +26,7 @@ During project creation, you entered the URL to your remote project (e.g. on Git
 
     - `README.md`
     - `CHANGELOG.md`
-    - documentation configuration (either `mkdocs.yaml` or `docs/conf.py`)
+    - documentation configuration (either `mkdocs.yml` or `docs/conf.py`)
 
 Let's start with an empty commit so we can verify everything is set up correctly without actually committing any files yet:
 

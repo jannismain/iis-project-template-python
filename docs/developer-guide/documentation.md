@@ -4,9 +4,9 @@ This project uses MkDocs with the Material for MkDocs theme.
 
 ## Configuration
 
-??? quote "`mkdocs.yaml` Configuration File"
+??? quote "`mkdocs.yml` Configuration File"
 
-    {{ includex('mkdocs.yaml', indent=4, code=True) }}
+    {{ includex('mkdocs.yml', indent=4, code=True) }}
 
 ## Navigation
 

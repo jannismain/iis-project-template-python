@@ -43,7 +43,7 @@ usually included as [docstrings][] with the code and extracted by a third-party 
 
 ### Material for MkDocs
 
-Projects generated with this option start with [MkDocs][] as a documentation system right out of the box, which is configured via the `./mkdocs.yaml` file to use the excellent [Material for MkDocs][] theme. Python docstrings are extracted and added as reference documentation using the [`mkdocstrings`][mkdocstrings] extension.
+Projects generated with this option start with [MkDocs][] as a documentation system right out of the box, which is configured via the `./mkdocs.yml` file to use the excellent [Material for MkDocs][] theme. Python docstrings are extracted and added as reference documentation using the [`mkdocstrings`][mkdocstrings] extension.
 
 See the [MkDocs reference](../../reference/tooling/mkdocs.md) for more information about the MkDocs configuration provided by the template.
 

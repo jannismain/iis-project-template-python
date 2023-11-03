@@ -7,7 +7,7 @@
     ".gitignore",
     ".gitlab-ci.yml",
     ".pre-commit-config.yaml",
-    "mkdocs.yaml",
+    "mkdocs.yml",
     "template",
     "pyproject.toml"
   ],
