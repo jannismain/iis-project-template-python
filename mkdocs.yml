@@ -62,6 +62,8 @@ plugins:
   - tags:
       enabled: !ENV [CI, true]
       tags_file: reference/tooling/index.md
+  - mike:
+      canonical_version: latest
 
 markdown_extensions:
   - abbr
@@ -127,3 +129,5 @@ extra:
     Testing: test
     Continuous Integration: ci
     Version Control: vcs
+  version:
+    provider: mike
