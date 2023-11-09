@@ -8,3 +8,4 @@ docs:
   artifacts:
     paths:
       - build/docs
+    expire_in: 1d

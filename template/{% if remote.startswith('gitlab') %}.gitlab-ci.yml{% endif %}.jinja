@@ -37,7 +37,7 @@ test:
       - build/coverage
       - build/badges
       - env/
-    expire_in: 1w  # most recent artifact is always kept
+    expire_in: 1d  # most recent artifact is always kept
 
 {% if docs == 'sphinx' -%}
 include: docs/.gitlab/docs.yml
@@ -50,6 +50,7 @@ docs:
   artifacts:
     paths:
       - build/docs
+    expire_in: 1d
 
 {% endif -%}
 
@@ -69,4 +70,4 @@ pages:
   artifacts:
     paths:
       - public
-    expire_in: 1w
+    expire_in: 1d
