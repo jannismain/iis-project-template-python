@@ -8,10 +8,29 @@ description = "A python project generator."
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Jannis Mainczyk", email = "jmainczyk@gmail.com" }]
-maintainers = [{ name = "Jannis Mainczyk", email = "jmainczyk@gmail.com" }]
-dependencies = ["copier", "typer[all]"]
+dependencies = ["copier", "typer[all]", "copier-templates-extensions"]
 dynamic = ["version"]
-license = { file = "LICENSE", type = "MIT" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX",
+    "Operating System :: Unix",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Version Control :: Git",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Software Development :: Documentation",
+    "Topic :: Utilities",
+]
 
 [tool.setuptools_scm]
 fallback_version = "0.0.0"
