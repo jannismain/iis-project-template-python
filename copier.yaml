@@ -132,6 +132,18 @@ user_name:
 
     Together with [remote][], it will be used to suggest a [remote url][remote-url] for your project.
 
+author_email:
+  type: str
+  help: E-Mail address you want to include as author information
+  when: false
+  default: ""
+  explanation: |
+    This is the E-Mail address that will be included in your project's metadata.
+
+    Defaults to the email address from your global git configuration: `git config --global user.email`.
+
+    If not configured, it will be omitted.
+
 remote_url:
   type: str
   help: URL of the remote repository

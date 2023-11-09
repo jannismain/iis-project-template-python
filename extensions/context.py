@@ -1,3 +1,5 @@
+import logging
+import os
 import subprocess
 
 from copier_templates_extensions import ContextHook
@@ -27,11 +29,25 @@ REMOTE_URLS = {
 class ContextUpdater(ContextHook):
     update = False
 
-    def hook(self, context):
+    def hook(self, context: dict) -> dict:
         context["author_name"] = call(["git", "config", "user.name"]) or context["user_name"]
-        context["author_email"] = call(["git", "config", "--global", "user.email"]) or ""
+        if not context["author_email"]:
+            context["author_email"] = call(["git", "config", "--global", "user.email"]) or ""
+            if not context["author_email"] and "IPP_SKIP_EMAIL_WARNING" not in os.environ:
+                fp_pyproject = context["_copier_conf"]["dst_path"] / "pyproject.toml"
+                logging.warn(
+                    "Author email could not be inferred from your git config.\n"
+                    "This project was configured without an author email address.\n"
+                    "To configure your email address:\n\n"
+                    "    git config --global user.email <email>\n\n"
+                    f"For now, you can manually add your email address to the 'author' value in '{fp_pyproject}'."
+                )
+                # required as hook seems to be called for each individual file with the original context
+                os.environ["IPP_SKIP_EMAIL_WARNING"] = "1"
+
         infer_urls_from_remote(context)
         context["cli_command"] = context["package_name"].replace("_", "-")
+        return context
 
 
 def infer_urls_from_remote(context) -> dict[str, str]:

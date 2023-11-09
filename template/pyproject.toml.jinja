@@ -43,14 +43,14 @@ requires-python = ">=3.7"
 # Name or names of the individual or organization which originally authored
 # the project, and a valid email address corresponding to the name listed.
 authors = [
-  { name = "{{author_name}}", email = "{{author_email}}" },
+  { name = "{{author_name}}"{%if author_email %}, email = "{{author_email}}"{% endif %} },
 ]
 
 # Name or names of the individual or organization which currently maintains
 # the project, and a valid email address corresponding to the name listed.
-maintainers = [
-  { name = "{{author_name}}", email = "{{author_email}}" },
-]
+# Note: This becomes important when the original author is no longer
+# maintaining the project
+# maintainers = [{ name = "", email = "" }]
 
 # Classifiers help users find your project by categorizing it.
 #
