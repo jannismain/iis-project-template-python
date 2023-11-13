@@ -4,6 +4,7 @@
 [![](https://img.shields.io/badge/Documentation-main-blue)][docs]
 [![](https://img.shields.io/badge/Example-Sample_Project-blue)][sample project]
 [![PyPI - Version](https://img.shields.io/pypi/v/init-python-project)][pypi]
+[![Downloads](https://static.pepy.tech/badge/init-python-project)]()
 
 </div>
 
