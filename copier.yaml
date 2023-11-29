@@ -12,7 +12,8 @@ project_name:
 package_name:
   type: str
   help: What is the name of your Python package?
-  default: "{{ project_name|lower|replace(' ', '_')|replace('-', '_') }}"
+  default: "{{ project_name|lower|replace(' ', '_')|replace('-', '_')|replace(':', '')|replace('@', '')|replace('!', '')|replace('?', '') }}"
+  validator: "{% if not package_name.isidentifier() %}Invalid module name{% endif %}"
   expected: Lowercase string, can contain underscores
   explanation: |
     This is the name of your Python package. As such, it will be used as the name of the directory containing your code.
