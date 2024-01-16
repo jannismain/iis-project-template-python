@@ -11,8 +11,8 @@ examples: ## build all published examples
 examples: $(PUBLISHED_EXAMPLES)
 
 INIT_PYTHON_PROJECT_ARGS=--project-name="Sample Project"
-build/examples/%: EXAMPLE_DIR:=$@
-build/examples/github: INIT_PYTHON_PROJECT_ARGS+=--user-name=jannismain --remote=github --remote-url=git@github.com:jannismain/python-project-template-example.git
+build/examples/%: EXAMPLE_DIR:=$@ INIT_PYTHON_PROJECT_ARGS+=--project-name="Sample Project" --package-name=sample_project
+build/examples/github: INIT_PYTHON_PROJECT_ARGS+=--user-name=jannismain --docs=mkdocs --remote=github --remote-url=git@github.com:jannismain/python-project-template-example.git --author-email=jmainczyk@gmail.com --author-name=jannismain
 build/examples/gitlab%: INIT_PYTHON_PROJECT_ARGS+=--user-name mkj
 build/examples/gitlab_fhg: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-fhg --remote-url=git@gitlab.cc-asp.fraunhofer.de:mkj/sample-project.git
 build/examples/gitlab_iis: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project.git
