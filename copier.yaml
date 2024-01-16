@@ -52,9 +52,35 @@ package_name:
 
     Finally, the package name is repeated across multiple configuration and documentation files.
 
+mode:
+  type: str
+  choices:
+    📦 Simple Package - minimal tooling: minimal
+    ✨ Fully featured - default tooling: default
+    🙋 Customize - select the parts you want: custom
+  default: default
+  help: "What kind of project do you want to create?"
+  explanation: |
+    This template supports three different modes:
+
+    - **minimal**: Generate a simple Python package with minimal tooling.
+      This is a good starting point if you want to create a package from scratch
+      and add your own tooling as you go.
+      The created project structure uses a `src` directory layout and includes a `sample_project` module with tests.
+
+    - **default**: Generate a Python project with all the bells and whistles.
+      This is a good starting point if you want to setup a project with dev-tooling already in place.
+      Compared to `minimal`, it includes configurations for continuous integration, documentation, linting, formatting, etc.
+
+    - **custom**: Generate a Python package with the tooling you want.
+      This is a good starting point if you want to customize the project to your needs.
+      You can choose which tools you want to use and which you don't.
+
+
 precommit:
   type: bool
-  default: true
+  default: "{{ mode != 'minimal'}}"
+  when: "{{ mode == 'custom' }}"
   help: Use pre-commit to run checks on each commit?
   explanation: |
     [pre-commit](../reference/tooling/pre-commit.md) is a tool that makes configuring [git hooks][git-hooks] a lot easier.
@@ -68,6 +94,7 @@ precommit:
 bumpversion:
   type: bool
   default: false
+  when: "{{ mode == 'custom' }}"
   help: Use bumpversion to manage semantic version across multiple files?
   explanation: |
     If you want to version your project, [bumpversion][] provides an easy way to increase version numbers across multiple files.
@@ -83,7 +110,8 @@ docs:
     Material for MkDocs: mkdocs
     Sphinx: sphinx
     None: none
-  default: "mkdocs"
+  default: "sphinx"
+  when: "{{ mode == 'custom' }}"
   help: Which documentation tool do you want to use?
   explanation: |
     [Documentation][documentation] is an important part of any project.
@@ -102,13 +130,13 @@ docs:
 docs_template:
   type: str
   choices:
-    Fraunhofer IIS Sphinx Template: sphinx-fhg-iis
-    None: none
+    Fraunhofer IIS Product Documentation Template: sphinx-fhg-iis
+    Default: none
   default: "none"
-  when: "{{ docs == 'sphinx' }}"
-  help: Which documentation template do you want to use?
+  when: "{{ docs == 'sphinx' and mode == 'custom' }}"
+  help: Which Sphinx documentation template do you want to use?
   explanation: |
-    See [Fraunhofer IIS Sphinx Template](https://git01.iis.fhg.de/sch/sphinx_template/).
+    See [Fraunhofer IIS Product Documentation Template](https://git01.iis.fhg.de/sch/sphinx_template/).
 
 remote:
   choices:
@@ -179,6 +207,7 @@ remote_url:
 default_branch:
   type: str
   default: main
+  when: "{{ mode == 'custom' }}"
   help: Name of the initial git branch that will be created
   expected: Lowercase string, can contain dashes
   examples: [main, master, dev]

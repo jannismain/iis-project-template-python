@@ -25,9 +25,9 @@ $(PUBLISHED_EXAMPLES): uncopy-template link-template
 	$(MAKE) example-setup EXAMPLE_DIR="$@"
 
 docs/examples/mkdocs: INIT_PYTHON_PROJECT_ARGS+=--docs mkdocs
-docs/examples/sphinx: INIT_PYTHON_PROJECT_ARGS+=--docs sphinx
-docs/examples/minimal: INIT_PYTHON_PROJECT_ARGS+=--docs none --no-precommit --no-bumpversion
-docs/examples/full: INIT_PYTHON_PROJECT_ARGS+=--docs mkdocs --precommit --bumpversion
+docs/examples/default: INIT_PYTHON_PROJECT_ARGS+=--mode default
+docs/examples/minimal: INIT_PYTHON_PROJECT_ARGS+=--mode minimal
+docs/examples/full: INIT_PYTHON_PROJECT_ARGS+=--mode custom --precommit --bumpversion
 docs/examples/gitlab: INIT_PYTHON_PROJECT_ARGS+=--docs mkdocs --precommit --bumpversion --remote gitlab-iis
 doc-examples: $(DOC_EXAMPLES)
 $(DOC_EXAMPLES): uncopy-template copy-template

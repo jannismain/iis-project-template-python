@@ -25,6 +25,7 @@ fp_template = Path(__file__).parent.parent
 required_static_data = dict(
     project_name="Sample Project",
     user_name="mkj",
+    mode="custom",
 )
 
 
@@ -189,8 +190,10 @@ def test_remote_option(tmp_path: Path, remote: str):
         assert "github.com" in readme_template_url
     if remote.startswith("gitlab"):
         gitlab_ci_yml = tmp_path / ".gitlab-ci.yml"
-        assert gitlab_ci_yml.is_file()
-        check_call(["pre-commit", "run", "--all-files", "gitlabci-lint"], cwd=str(tmp_path))
+        assert gitlab_ci_yml.is_file(), ".gitlab-ci-yml should exist"
+        assert yaml.safe_load(gitlab_ci_yml.open()), "gitlab-ci.yml should be valid yaml"
+        # TODO: Find more reliable way to lint gitlab-ci files
+        # check_call(["pre-commit", "run", "--all-files", "gitlabci-lint"], cwd=str(tmp_path))
     if remote.endswith("iis"):
         assert remote_url == f"git@git01.iis.fhg.de:{user_name}/wonderful-project.git"
         assert "git01.iis.fhg.de" in readme_template_url

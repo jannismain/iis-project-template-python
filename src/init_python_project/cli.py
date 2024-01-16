@@ -40,6 +40,13 @@ class RemotePlatform(StrEnum):
     gitlab_iis = "gitlab-iis"
 
 
+class ProjectMode(StrEnum):
+    "which kind of project to generate"
+    minimal = "minimal"
+    default = "default"
+    custom = "custom"
+
+
 def CustomOptional(_type=bool, help="", custom_flag: str | list = None, **kwargs):
     if issubclass(_type, StrEnum):
         kwargs = {"case_sensitive": False, **kwargs}
@@ -70,6 +77,7 @@ def cli(
     remote_url: CustomOptional(str, "ssh url where your repository will be hosted on") = None,
     precommit: CustomOptional(bool, "include pre-commit hooks") = None,
     bumpversion: CustomOptional(bool, "include bumpversion configuration") = None,
+    mode: CustomOptional(ProjectMode) = None,
     # arguments that affect project creation
     defaults: Annotated[
         bool, Option("--defaults", "-d", help="automatically accept all default options")
@@ -121,7 +129,7 @@ def cli(
         raise typer.Exit(1)
 
     # cast enums to their values
-    for option in "docs remote".split():
+    for option in "docs remote mode".split():
         if locals()[option] is not None:
             locals()[option] = locals()[option].value
 
@@ -129,7 +137,7 @@ def cli(
     data = {}
     for (
         option
-    ) in "project_name package_name user_name author_email docs remote remote_url precommit bumpversion".split():
+    ) in "project_name package_name user_name author_email docs remote remote_url precommit bumpversion mode".split():
         value = locals()[option]
         if value is not None:
             logging.info("%s: %s", option, value)
