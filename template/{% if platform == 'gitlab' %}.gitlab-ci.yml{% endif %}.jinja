@@ -54,6 +54,14 @@ docs:
 
 {% endif -%}
 
+{% if use_cspell -%}
+spellcheck:
+  image: nikolaik/python-nodejs
+  script:
+    - npm i -g --no-fund cspell
+    - make cspell
+
+{% endif %}
 pages:
   needs: [test{% if docs != 'none' %}, docs{% endif %}]
   only:

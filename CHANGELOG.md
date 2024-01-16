@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - default: use default (i.e. recommended) tooling
     - minimal: create bare-minimum project
     - custom: choose which tools to include
+- add cspell for spellchecking to default tooling
 - author/maintainer name and email are read from global git configuration.
 
 ### Fixed

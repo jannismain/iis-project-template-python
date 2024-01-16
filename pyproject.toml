@@ -72,7 +72,7 @@ init-python-project = "init_python_project.cli:app"
 minversion = "6.0"
 addopts = "-ra -q -n auto --exitfirst"
 testpaths = ["tests"]
-markers = ["slow"]
+markers = ["slow", "npm_required"]
 filterwarnings = [
     "ignore::copier.vcs.DirtyLocalWarning",
     "ignore::DeprecationWarning:copier.*",

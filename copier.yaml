@@ -76,7 +76,6 @@ mode:
       This is a good starting point if you want to customize the project to your needs.
       You can choose which tools you want to use and which you don't.
 
-
 precommit:
   type: bool
   default: "{{ mode != 'minimal'}}"
@@ -103,6 +102,19 @@ bumpversion:
     Used correctly, releasing a new version of your project can be done with a single command.
 
     It also helps to follow [semantic versioning][semantic-versioning] guidelines when increasing your version numbers.
+
+use_cspell:
+  when: "{{ mode == 'custom' }}"
+  type: bool
+  help: Use cspell for spell checking?
+  default: "{{ mode != 'minimal' }}"
+  explanation: |
+    ## CSpell
+
+    [cspell][] is a spell checker that can be used to check spelling in your code and documentation.
+
+    It is configured to check for American English by default.
+    If you want to use a different language, you can change this in the `cspell.json` config file.
 
 docs:
   type: str

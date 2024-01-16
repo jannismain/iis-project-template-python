@@ -15,4 +15,9 @@ repos:
       - id: gitlabci-lint
         args: ["-p", "46207681"]  # project id is required, but any will do
         entry: env GITLAB_TOKEN=w8i5Q1CaEpF57cqxezvG gitlabci-lint
-        files: "^\\.gitlab-ci\\.yml$"{% endif %}
+        files: "^\\.gitlab-ci\\.yml$"{% endif %}{% if use_cspell %}
+  - repo: https://github.com/streetsidesoftware/cspell-cli
+    rev: v8.3.0
+    hooks:
+      - id: cspell
+        args: [--show-suggestions, --show-context, --no-must-find-files]{% endif %}

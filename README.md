@@ -22,6 +22,7 @@ A customizable template for new Python projects to get you up and running with c
     - Coverage report is integrated with [Gitlab's coverage report artifact][gitlab coverage report]
 - Projects use [pre-commit][] for sanity checks on each commit or push
 - Projects use bumpversion to increase their version according to [semantic versioning guidelines][semver]
+- Projects are spellchecked using [CSpell][]
 - Python projects are installable by default and provide a simple command-line interface
 
 [material for mkdocs]: https://squidfunk.github.io/mkdocs-material
@@ -29,6 +30,7 @@ A customizable template for new Python projects to get you up and running with c
 [gitlab coverage report]: https://docs.gitlab.com/ee/ci/yaml/artifacts_reports.html#artifactsreportscoverage_report
 [pre-commit]: https://pre-commit.com/
 [semver]: https://semver.org/
+[cspell]: https://cspell.org/
 
 Everything comes pre-configured with sensible defaults so you can focus on your implementation and let the template handle the rest.
 

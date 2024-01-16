@@ -1,0 +1,24 @@
+{
+  "version": "0.2",
+  "enabled": true,
+  "ignorePaths": ["Makefile", ".gitlab-ci.yml", ".pre-commit-config.yaml", ".copier-answers.yml"{% if docs=="sphinx" %}, "docs/conf.py", "docs/requirements.txt", "docs/.gitlab"{% endif %}{% if platform=="github" %}, ".github"{% endif %}],
+  "dictionaryDefinitions": [
+    {
+      "name": "project-terms",
+      "path": "project-terms.txt",
+      "description": "Names and terms related to this project."
+    }
+  ],
+  "note": "List of built-in dictionaries: https://cspell.org/docs/dictionaries/",
+  "dictionaries": ["en_us", "project-terms", "softwareTerms", "python", "python-common"],
+  "ignoreWords": ["pyupgrade", "autobuild", "toctree"{% if docs=="mkdocs" %}, "mkdocs", "mkdocstrings", "timeago"{% endif %}],
+  "language": "en-US",
+  "useGitignore": true,
+  "overrides": [
+    {
+      // Case sensitive spellchecking for Markdown files
+      "filename": "**/*.md",
+      "caseSensitive": true
+    }
+  ]
+}

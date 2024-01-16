@@ -378,3 +378,43 @@ def test_bumpversion_option(venv: VirtualEnvironment, tmp_path: Path, bumpversio
     check_output([venv_bin / "bumpversion", "major"])
     assert read_pyproject_version(fp_pyproject) == "1.0.0"
     assert read_last_commit_msg() == "bump v0.1.0 -> v1.0.0"
+
+
+@pytest.mark.npm_required
+@pytest.mark.parametrize("use_cspell", [True, False], ids=["cspell", "no-cspell"])
+def test_use_cspell(venv: VirtualEnvironment, tmp_path: Path, use_cspell: bool):
+    project_root = tmp_path
+
+    run_copy(
+        str(fp_template),
+        str(project_root),
+        data=dict(
+            **required_static_data,
+            use_cspell=use_cspell,
+            precommit=True,
+        ),
+        unsafe=True,
+        defaults=True,
+        vcs_ref="HEAD",
+    )
+    fp_precommit_config = project_root / ".pre-commit-config.yaml"
+    precommit_hooks = get_precommit_hooks(fp_precommit_config)
+
+    if not use_cspell:
+        assert "cspell" not in precommit_hooks
+        return
+
+    assert "cspell" in precommit_hooks
+
+    os.chdir(project_root)
+
+    check_output(["make", "cspell-install"])
+    check_output(["make", "cspell"])
+
+    # install project including dev dependencies
+    venv.install(".[dev]", editable=True)
+    venv_bin = Path(venv.bin)
+
+    # verify that cspell precommit hook works and runs cleanly on initial commit
+    check_output(["git", "add", "."])
+    check_output([venv_bin / "pre-commit", "run", "--all-files", "cspell"])
