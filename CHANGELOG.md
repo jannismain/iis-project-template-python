@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - fix warning when building sphinx documentation -> maintainability badge now links to pipeline
+- when building docs in GitHub Action, clone full repository to allow `git-revision-date-localized-plugin` to determine the correct timestamps
 - fix issue where project names (and repo urls) were shortened inadvertently
 
 ## [0.0.6] - 2023-10-12
