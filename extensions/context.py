@@ -30,7 +30,11 @@ class ContextUpdater(ContextHook):
     update = False
 
     def hook(self, context: dict) -> dict:
-        context["author_name"] = call(["git", "config", "user.name"]) or context["user_name"]
+        context["author_name"] = (
+            context.get("author_name")
+            or call(["git", "config", "user.name"])
+            or context["user_name"]
+        )
         if not context["author_email"]:
             context["author_email"] = call(["git", "config", "--global", "user.email"]) or ""
             if not context["author_email"] and "IPP_SKIP_EMAIL_WARNING" not in os.environ:
@@ -71,7 +75,7 @@ def infer_urls_from_remote(context) -> dict[str, str]:
 
     platform = remote.split("-", 1)[0]
     domain = remote_url.replace("git@", "").split(":", 1)[0]
-    path = remote_url.split(":", 1)[1].rstrip(".git")
+    path = remote_url.split(":", 1)[1].removesuffix(".git")
     group = path.split("/", 1)[0]
     domain_pages = REMOTE_URLS[remote]["domain_pages"]
     pages_path = path.split("/", 2)[1]
