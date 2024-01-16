@@ -3,7 +3,7 @@ install: ## install all dependencies & development requirements
 	@pip install -e .[dev,test,doc]
 
 PUBLISHED_EXAMPLES = build/examples/github build/examples/gitlab_fhg build/examples/gitlab_iis build/examples/gitlab_iis_sphinx
-DOC_EXAMPLES = docs/examples/mkdocs docs/examples/sphinx docs/examples/default docs/examples/minimal docs/examples/full docs/examples/gitlab
+DOC_EXAMPLES = docs/examples/mkdocs docs/examples/default docs/examples/minimal docs/examples/full docs/examples/gitlab
 
 .PHONY: examples $(PUBLISHED_EXAMPLES) example-setup example-setup-commit example-setup-local example examples-clean
 
@@ -13,9 +13,9 @@ examples: $(PUBLISHED_EXAMPLES)
 INIT_PYTHON_PROJECT_ARGS=--project-name="Sample Project"
 build/examples/%: EXAMPLE_DIR:=$@ INIT_PYTHON_PROJECT_ARGS+=--project-name="Sample Project" --package-name=sample_project
 build/examples/github: INIT_PYTHON_PROJECT_ARGS+=--user-name=jannismain --docs=mkdocs --remote=github --remote-url=git@github.com:jannismain/python-project-template-example.git --author-email=jmainczyk@gmail.com --author-name=jannismain
-build/examples/gitlab%: INIT_PYTHON_PROJECT_ARGS+=--user-name mkj
-build/examples/gitlab_fhg: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-fhg --remote-url=git@gitlab.cc-asp.fraunhofer.de:mkj/sample-project.git
-build/examples/gitlab_iis: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project.git
+build/examples/gitlab%: INIT_PYTHON_PROJECT_ARGS+=--user-name=mkj
+build/examples/gitlab_fhg: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-fhg --remote-url=git@gitlab.cc-asp.fraunhofer.de:mkj/sample-project.git --docs=mkdocs
+build/examples/gitlab_iis: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project.git --docs=mkdocs
 build/examples/gitlab_iis_sphinx: INIT_PYTHON_PROJECT_ARGS+=--remote=gitlab-iis --remote-url=git@git01.iis.fhg.de:mkj/sample-project-sphinx.git --docs=sphinx
 
 $(PUBLISHED_EXAMPLES): uncopy-template link-template

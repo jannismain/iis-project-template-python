@@ -82,6 +82,8 @@ precommit:
   when: "{{ mode == 'custom' }}"
   help: Use pre-commit to run checks on each commit?
   explanation: |
+    ## Pre-commit
+
     [pre-commit](../reference/tooling/pre-commit.md) is a tool that makes configuring [git hooks][git-hooks] a lot easier.
 
     This template uses pre-commit hooks to ensure, all changes match the expected formatting and style.
@@ -187,7 +189,7 @@ author_name:
 
 author_email:
   type: str
-  help: E-Mail address you want to include as author information
+  help: Your email address (used in the project metadata)
   when: false
   default: ""
   explanation: |

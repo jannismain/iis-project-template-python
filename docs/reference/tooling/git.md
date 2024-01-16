@@ -1,5 +1,5 @@
 ---
-tags: [Version Control]
+tags: [Versioning]
 ---
 
 # git
