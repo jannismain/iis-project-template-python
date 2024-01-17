@@ -78,6 +78,7 @@ def cli(
     remote_url: CustomOptional(str, "ssh url where your repository will be hosted on") = None,
     precommit: CustomOptional(bool, "include pre-commit hooks") = None,
     bumpversion: CustomOptional(bool, "include bumpversion configuration") = None,
+    ruff: CustomOptional(bool, "use ruff for linting") = None,
     mode: CustomOptional(ProjectMode) = None,
     # arguments that affect project creation
     defaults: Annotated[
@@ -138,7 +139,7 @@ def cli(
     data = {}
     for (
         option
-    ) in "project_name package_name user_name author_email author_name docs remote remote_url precommit bumpversion mode".split():
+    ) in "project_name package_name user_name author_email author_name docs remote remote_url precommit bumpversion mode ruff".split():
         value = locals()[option]
         if value is not None:
             logging.info("%s: %s", option, value)

@@ -37,6 +37,8 @@ def test_template_generation_via_cli(bin: Path, tmp_path: Path, mode: str):
         child.sendline("")  # accept default
         child.expect(".* bumpversion.*")
         child.sendline("")  # accept default
+        child.expect(".* ruff.*")
+        child.sendline("")  # accept default
         child.expect(".* cspell.*")
         child.sendline("")  # accept default
         child.expect(".* documentation.*")

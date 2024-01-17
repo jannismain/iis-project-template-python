@@ -105,6 +105,12 @@ bumpversion:
 
     It also helps to follow [semantic versioning][semantic-versioning] guidelines when increasing your version numbers.
 
+ruff:
+  when: "{{ mode == 'custom' }}"
+  type: bool
+  help: Use ruff for linting?
+  default: "{{ mode != 'minimal' }}"
+
 use_cspell:
   when: "{{ mode == 'custom' }}"
   type: bool

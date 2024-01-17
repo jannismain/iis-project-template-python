@@ -418,3 +418,51 @@ def test_use_cspell(venv: VirtualEnvironment, tmp_path: Path, use_cspell: bool):
     # verify that cspell precommit hook works and runs cleanly on initial commit
     check_output(["git", "add", "."])
     check_output([venv_bin / "pre-commit", "run", "--all-files", "cspell"])
+
+
+@pytest.mark.parametrize("ruff", [True, False], ids=["ruff", "no-ruff"])
+def test_ruff(venv: VirtualEnvironment, tmp_path: Path, ruff: bool):
+    project_root = tmp_path
+
+    run_copy(
+        str(fp_template),
+        str(project_root),
+        data=dict(
+            **required_static_data,
+            ruff=ruff,
+            precommit=True,
+        ),
+        unsafe=True,
+        defaults=True,
+        vcs_ref="HEAD",
+    )
+    fp_precommit_config = project_root / ".pre-commit-config.yaml"
+    precommit_hooks = get_precommit_hooks(fp_precommit_config)
+
+    fp_pyproject = project_root / "pyproject.toml"
+    pyproject = tomllib.load(fp_pyproject.open("rb"))
+    dev_dependencies = pyproject["project"]["optional-dependencies"]["dev"]
+
+    if not ruff:
+        assert "ruff" not in precommit_hooks
+        assert "ruff" not in dev_dependencies
+        assert "ruff" not in pyproject.get("tool", {})
+        return
+
+    assert "ruff" in precommit_hooks
+    assert "ruff" in dev_dependencies
+    assert "ruff" in pyproject["tool"]
+
+    os.chdir(project_root)
+
+    venv.install(".[dev]", editable=True)
+    venv_bin = Path(venv.bin)
+
+    # verify that generated project conforms to ruff rules & formatting
+    check_output([venv_bin / "ruff", "format", "--check", project_root])
+    check_output([venv_bin / "ruff", "check", project_root])
+
+    # verify that ruff precommit hook works and runs cleanly on initial commit
+    check_output(["git", "add", "."])
+    check_output([venv_bin / "pre-commit", "run", "--all-files", "ruff"])
+    check_output([venv_bin / "pre-commit", "run", "--all-files", "ruff-format"])

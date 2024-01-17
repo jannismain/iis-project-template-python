@@ -94,7 +94,7 @@ dependencies = ["click"]
 # Similar to `dependencies` above, these must be valid existing
 # projects.
 [project.optional-dependencies]
-dev = ["black", "radon"{% if precommit %}, "pre-commit"{% endif %}{% if bumpversion %}, "bump2version"{% endif %}]
+dev = ["black", "radon"{% if precommit %}, "pre-commit"{% endif %}{% if ruff %}, "ruff"{% endif %}{% if bumpversion %}, "bump2version"{% endif %}]
 test = ["pytest", "pytest-cov", "coverage[toml]"]
 
 # The following would provide a command line executable which executes
@@ -125,7 +125,7 @@ exclude_lines = ["if __name__ == .__main__."]
 
 [tool.coverage.html]
 directory = "build/coverage"
-
+{% if ruff %}
 [tool.ruff]
 extend-select = ["I", "D", "UP", "PIE790", "C90", "N", "B"]
 # unnecessary-pass (PIE790)
@@ -146,8 +146,8 @@ convention = "google"
 [tool.ruff.mccabe]
 # Flag errors (`C901`) whenever the complexity level exceeds 5.
 max-complexity = 5
-# Ignore `E402` (import violations) in all `__init__.py` files, and in `path/to/file.py`.
 
 [tool.ruff.per-file-ignores]
+# Ignore `E402` (import violations) in all `__init__.py` files.
 "__init__.py" = ["E402"]
-"docs/source/conf.py" = ["E402"]
+{% endif -%}
