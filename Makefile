@@ -92,7 +92,7 @@ spellcheck: ## check spelling using cspell
 spellcheck-ci:
 	cspell --no-cache ${CSPELL_ARGS} ${CSPELL_FILES}
 spellcheck-dump: ## save all flagged words to project terms dictionary
-	cspell ${CSPELL_ARGS} ${CSPELL_FILES} --words-only >> ${DICT_FILE}
+	cspell ${CSPELL_ARGS} ${CSPELL_FILES} --words-only --no-exit-code >> ${DICT_FILE}
 	sort --ignore-case --output=${DICT_FILE} ${DICT_FILE}
 
 
