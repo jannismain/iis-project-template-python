@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- documentation of a known issue with `NoConsoleScreenBufferError` during runtime under Windows git-bash (provided by [@lieutdan13][])
-- email address in pyproject.toml is now configureable
+- documentation of a known issue with `NoConsoleScreenBufferError` during runtime under Windows git-bash (provided by [@lieutdan13])
+- email address in pyproject.toml is now configurable (provided by to [@lieutdan13])
 
 ## [0.0.6] - 2023-10-12
 
